@@ -8,7 +8,7 @@ namespace TFLAppHandcoded
 {
     // Lecture 3
     // Doubly Linked List Node 
-    class DLListNode  // : ListNode
+    public class DLListNode  // : ListNode
     {
         private Object     item ;
         private DLListNode previous ;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TFLAppHandcoded
 {
-    class ListNode
+    public class ListNode
     {
         private Object item ;
         private ListNode next ;
