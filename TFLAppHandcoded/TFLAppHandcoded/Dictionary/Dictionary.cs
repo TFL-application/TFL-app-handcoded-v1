@@ -12,7 +12,7 @@ namespace TFLAppHandcoded.Dictionary
 
 		public int GetLength() { return dictionary.Length; }
 
-        public K[] GetRecordKeys()
+        public K[] GetDictionaryRecordKeys()
         {
             K[] keys = new K[dictionary.Length];
             for (int i = 0; i < dictionary.Length; i++)

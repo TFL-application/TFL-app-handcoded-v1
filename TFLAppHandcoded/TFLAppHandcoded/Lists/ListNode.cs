@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace TFLAppHandcoded
 {
-    public class ListNode<T>
+    public class ListNode
     {
-        private T item ;
-        private ListNode<T> next ;
+        private Object item ;
+        private ListNode next ;
 
-        //public ListNode()
-        //{
-        //    item = null ;
-        //    next = null ;
-        //}
+        public ListNode()
+        {
+            item = null ;
+            next = null ;
+        }
 
-        public ListNode( T item )
+        public ListNode( Object item )
         {
             this.item = item ;
             this.next = null ;
         }
 
-        public ListNode( T item, ListNode<T> next)
+        public ListNode( Object item, ListNode next)
         {
             this.item = item ;
             this.next = next ;
@@ -43,22 +43,22 @@ namespace TFLAppHandcoded
             }
         }
 
-        public void setItem( T item ) 
+        public void setItem( Object item ) 
         { 
             this.item = item ; 
         }
 
-        public void setNext( ListNode<T> next ) 
+        public void setNext( ListNode next ) 
         { 
             this.next = next ; 
         }
 
-        public T getItem() 
+        public Object getItem() 
         { 
             return this.item ; 
         }
 
-        public ListNode<T> getNext() 
+        public ListNode getNext() 
         { 
             return this.next ; 
         }

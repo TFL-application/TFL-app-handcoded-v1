@@ -8,57 +8,57 @@ namespace TFLAppHandcoded
 {
     // Lecture 3
     // Doubly Linked List Node 
-    public class DLListNode  // : ListNode
+    public class DLListNode<T>  // : ListNode
     {
-        private Object     item ;
-        private DLListNode previous ;
-        private DLListNode next ;
+        private T item ;
+        private DLListNode<T> previous ;
+        private DLListNode<T> next ;
 
         public DLListNode()
         {
-            this.item     = null;
-            this.next     = null;
-            this.previous = null;
+            //this.item     = null;
+            //this.next     = null;
+            //this.previous = null;
         }
 
-        public DLListNode( Object item )
+        public DLListNode( T item )
         {
             this.item     = item ;
             this.previous = null ;
             this.next     = null ;
         }
 
-        public DLListNode( Object item, DLListNode previous, DLListNode next )
+        public DLListNode( T item, DLListNode<T> previous, DLListNode<T> next )
         {
             this.item     = item ;
             this.previous = previous ;
             this.next     = next ;
         }
 
-        public void setItem( Object item )
+        public void setItem( T item )
         {
             this.item = item ;
         }
 
-        public void setPrevious( DLListNode previous )
+        public void setPrevious( DLListNode<T> previous )
         {
             this.previous = previous ;
         }
-        public void setNext( DLListNode next )
+        public void setNext( DLListNode<T> next )
         {
             this.next = next ;
         }
 
-        public Object getItem()
+        public T getItem()
         {
             return this.item ;
         }
 
-        public DLListNode getNext()
+        public DLListNode<T> getNext()
         {
             return this.next ;
         }
-        public DLListNode getPrevious()
+        public DLListNode<T> getPrevious()
         {
             return this.previous ;
         }

@@ -20,14 +20,14 @@ namespace TFLAppHandcoded
     //          This is why there are a lot of "if (XXX != null) " tests in the code. 
     ///////////////////////////////////////////////////////////////////////////////
 
-    public class DLinkedList
+    public class DLinkedList<T>
     {
-        private const DLListNode NO_NODE          = null ;  // increases readbility 
-        private const DLListNode NO_PREVIOUS_NODE = null ;  // better than "null" everywhere
-        private const DLListNode NO_NEXT_NODE     = null ;
+        private const DLListNode<T> NO_NODE          = null ;  // increases readbility 
+        private const DLListNode<T> NO_PREVIOUS_NODE = null ;  // better than "null" everywhere
+        private const DLListNode<T> NO_NEXT_NODE     = null ;
 
         // List "data structure": 
-        protected DLListNode head   = NO_NODE;   // points to the head of the list
+        protected DLListNode<T> head   = NO_NODE;   // points to the head of the list
         protected int        length = 0 ;        // number of nodes in the list
 
         public DLinkedList()
@@ -42,10 +42,10 @@ namespace TFLAppHandcoded
         }
 
         // 2 cases: (a) empty list, (b) non-empty list
-        public void insertAtHead( Object item )
+        public void insertAtHead( T item )
         {
             // creat a new head node for the item
-            DLListNode newItemNode = new DLListNode( item, NO_PREVIOUS_NODE, head ) ;
+            DLListNode<T> newItemNode = new DLListNode<T>( item, NO_PREVIOUS_NODE, head ) ;
 
             if ( head != NO_NODE)                   // check if empty list, i.e. no head node exists)
             { 
@@ -59,41 +59,41 @@ namespace TFLAppHandcoded
         }
 
 
-        private DLListNode findItem( Object item )
+        private DLListNode<T> findItem( T item )
         {
-            DLListNode current = new DLListNode() ;  // use current node to point to nodes as traverse the list
+            DLListNode<T> current = new DLListNode<T>() ;  // use current node to point to nodes as traverse the list
 
             current = head;                          // start at the head node
 
             // while not reached end of the list & not found the item continue traversal
             while ( ( current != NO_NODE ) && ( !item.Equals( current.getItem() ) ) )
             {
-                Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
+                //Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
 
                 current = current.getNext();  // move to next node in the list
             }
 
-            if (current != NO_NODE)
-            {
-                    Console.WriteLine("findItem: FOUND current.item = " + current.getItem().ToString());
-                    Console.WriteLine();
-            }
-            else 
-            {
-                Console.WriteLine("findItem: DID NOT FIND item = " + item.ToString());
-                Console.WriteLine();
-            }
+            //if (current != NO_NODE)
+            //{
+            //        Console.WriteLine("findItem: FOUND current.item = " + current.getItem().ToString());
+            //        Console.WriteLine();
+            //}
+            //else 
+            //{
+            //    Console.WriteLine("findItem: DID NOT FIND item = " + item.ToString());
+            //    Console.WriteLine();
+            //}
 
             return current;
            
         }
 
-        public bool insertAfter(Object newItem, Object afterItem)
+        public bool insertAfter(T newItem, T afterItem)
         {
             Console.WriteLine("insertAfter( {0}, {1} ): search for {1} node", newItem.ToString(), afterItem.ToString() ) ;
             Console.WriteLine();
 
-            DLListNode afterNode = findItem( afterItem ) ;  // find the afterItem's node
+            DLListNode<T> afterNode = findItem( afterItem ) ;  // find the afterItem's node
 
             if (afterNode != NO_NODE )
             {   
@@ -103,7 +103,7 @@ namespace TFLAppHandcoded
                 // previous <-- afterItem
                 // next     <-- afterItem's next node
 
-                DLListNode newItemNode = new DLListNode( newItem, afterNode, afterNode.getNext() );
+                DLListNode<T> newItemNode = new DLListNode<T>( newItem, afterNode, afterNode.getNext() );
 
                 // connect newItem's neighbour nodes to itself by updating their links:
                 newItemNode.getPrevious().setNext( newItemNode ) ;       // previous node's next --> newItem node
@@ -128,12 +128,12 @@ namespace TFLAppHandcoded
 	//   (b) item is head of list, 
 	//   (c) item is in the list but not the head 
 
-        public bool DeleteItem(Object deleteItem)
+        public bool DeleteItem(T deleteItem)
         {
             Console.WriteLine("DeleteItem( {0} ): search for {0} node", deleteItem.ToString() ) ;
             Console.WriteLine();
 
-            DLListNode deleteItemNode = findItem(deleteItem);  // find the deleteItem's node in the list
+            DLListNode<T> deleteItemNode = findItem(deleteItem);  // find the deleteItem's node in the list
 
             if ( deleteItemNode == NO_NODE )
             {
@@ -173,8 +173,8 @@ namespace TFLAppHandcoded
                     // ****** TUTORIAL EXERCISE: INSERT CODE HERE ****** 
                     // *************************************************
 
-                    DLListNode nextItemNode = deleteItemNode.getNext();
-                    DLListNode previousItemNode = deleteItemNode.getPrevious();
+                    DLListNode<T> nextItemNode = deleteItemNode.getNext();
+                    DLListNode<T> previousItemNode = deleteItemNode.getPrevious();
 
                     nextItemNode.setPrevious(previousItemNode);
                     previousItemNode.setNext(nextItemNode);
@@ -197,7 +197,7 @@ namespace TFLAppHandcoded
             }
             else
             {
-                DLListNode current = new DLListNode() ;
+                DLListNode<T> current = new DLListNode<T>() ;
 
                 current = head ;
 
