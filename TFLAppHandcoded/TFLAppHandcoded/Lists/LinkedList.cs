@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TFLAppHandcoded
 {
-    public class LinkedList
+    public class LinkedList<T>
     {
-        protected ListNode head   = null ;   // points to the head of the list
+        protected ListNode<T> head   = null ;   // points to the head of the list
         protected int      length = 0 ;      // number of nodes in the list
 
         public LinkedList()
@@ -17,14 +17,17 @@ namespace TFLAppHandcoded
             length = 0 ;      // no nodes in the list
         }
 
+        public int GetLength() { return length; }
+        public T GetHeadValue() { return head.getItem(); }
+
         public bool isEmpty()
         {
             return ( length == 0 ) ;       // or ( head == null )
         }
 
-        public void insertAtHead( Object item )
+        public void insertAtHead( T item )
         {
-            ListNode newItem = new ListNode( item, head ) ;  // .next ) ;
+            ListNode<T> newItem = new ListNode<T>( item, head ) ;  // .next ) ;
 
             head = newItem ;
 
@@ -32,13 +35,11 @@ namespace TFLAppHandcoded
         }
 
         // *** HAS A BUG? - so use Equals not != in while ***
-        private ListNode findItem( Object item )
+        private ListNode<T> findItem( T item )
         {
             if ( !isEmpty() )
             {
-                ListNode current = new ListNode() ;
-
-                current = head ;
+                ListNode<T> current = head ;
 
                 while ( (current != null) && ( !( item.Equals( current.getItem() ) ) ) )
                 {
@@ -65,15 +66,15 @@ namespace TFLAppHandcoded
             }
         }
 
-        public bool insertAfter( Object newItem, Object afterItem )
+        public bool insertAfter( T newItem, T afterItem )
         {
-            ListNode afterNode = findItem( afterItem ) ;  // find the afterItem's node
+            ListNode<T> afterNode = findItem( afterItem ) ;  // find the afterItem's node
 
             if ( afterNode != null )    // afterItem in list
             {
 
                 // create newItem's node & set its next to afterItem's next
-                ListNode newItemNode = new ListNode( newItem, afterNode.getNext() ) ;
+                ListNode<T> newItemNode = new ListNode<T>( newItem, afterNode.getNext() ) ;
 
                 afterNode.setNext( newItemNode ) ;
 
@@ -96,9 +97,7 @@ namespace TFLAppHandcoded
             }
             else
             {
-                ListNode current = new ListNode() ;
-
-                current = head ;
+                ListNode<T> current = head;
 
                 Console.WriteLine("Items in the list are:");
 
@@ -111,25 +110,26 @@ namespace TFLAppHandcoded
             }
         }
 
-        public Object deleteHead()
+        public T deleteHead()
         {
-            Object deletedItem = head.getItem();
+            T deletedItem = head.getItem();
             head = head.getNext();
             length--;
             return deletedItem;
         }
 
-        public void insertAtTail(Object item)
+        public void insertAtTail(T item)
         {
-            ListNode lastNode = head;
+            ListNode<T> lastNode = head;
             for (int i = 1; i < length; i++)
             {
                 lastNode = head.getNext();
             }
 
-            lastNode.setNext(new ListNode(item));
+            lastNode.setNext(new ListNode<T>(item));
             length++;
         }
+
     }  // LinkedList
 
 }

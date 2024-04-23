@@ -12,7 +12,11 @@ namespace TFLAppHandcoded.Interfaces
         string GetColor();
         void SetColor(string color);
         IStation GetStation(string name);
-        DLinkedList GetAllStations();
+        Station[] GetAllStations();
+        ITrack GetDistance(IStation start, IStation destination);
+
+        // Need too add
+        IStation[] GetConnectedStations(IStation station);
     }
 }
 
