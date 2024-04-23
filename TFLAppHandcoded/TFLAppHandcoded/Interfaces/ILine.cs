@@ -7,12 +7,14 @@ namespace TFLAppHandcoded.Interfaces
 {
 	public interface ILine
     {
+        void AddStation(IStation station, LinkedList<Station, Track> connections);
         string GetName();
         void SetName(string name);
         string GetColor();
         void SetColor(string color);
         IStation GetStation(string name);
-        DLinkedList GetAllStations();
+        IStation[] GetAllStations();
+        ITrack GetDistance(IStation start, IStation destination);
     }
 }
 
