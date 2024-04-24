@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +18,11 @@ namespace TFLAppHandcoded
             //this.item     = null;
             //this.next     = null;
             //this.previous = null;
+        }
+
+        public DLListNode(DLListNode<T> otherNode)
+        {
+            this.item     = otherNode.getItem();
         }
 
         public DLListNode( T item )

@@ -36,6 +36,22 @@ namespace TFLAppHandcoded
             length = 0 ;          // no nodes in the list
         }
 
+        public DLinkedList(DLinkedList<T> otherList)
+        {
+            this.head = new DLListNode<T>(otherList.head);
+            DLListNode<T> currentOldList = otherList.head;
+            DLListNode<T> currentNewList = this.head;
+
+            while (currentOldList is not null)
+            {
+
+            }
+        }
+
+        public int GetLength() { return length; }
+        public DLListNode<T> GetHead() { return head; }
+        public T GetHeadValue() { return head.getItem(); }
+
         public bool isEmpty()
         {
             return ( length == 0 );       // or ( head == NO_NODE )

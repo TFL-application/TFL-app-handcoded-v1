@@ -16,12 +16,14 @@ namespace TFLAppHandcoded
             length = 0;      // no nodes in the list
         }
 
-        public bool isEmpty()
+        public WeightedListNode<O, W> GetHead() { return head; }
+
+        public bool IsEmpty()
         {
             return (length == 0);       // or ( head == null )
         }
 
-        public void insertAtHead(O item, W weight)
+        public void InsertAtHead(O item, W weight)
         {
             WeightedListNode<O, W> newItem = new WeightedListNode<O, W>(item, weight, head);  // .next ) ;
 
@@ -31,7 +33,7 @@ namespace TFLAppHandcoded
         }
 
         // *** HAS A BUG? - so use Equals not != in while ***
-        private WeightedListNode<O, W> findItem(O item)
+        private WeightedListNode<O, W> FindItem(O item)
         {
             if (!isEmpty())
             {
@@ -64,7 +66,7 @@ namespace TFLAppHandcoded
             }
         }
 
-        public bool insertAfter(O newItem, W newItemWeight, O afterItem)
+        public bool InsertAfter(O newItem, W newItemWeight, O afterItem)
         {
             WeightedListNode<O, W> afterNode = findItem(afterItem);  // find the afterItem's node
 
@@ -87,7 +89,7 @@ namespace TFLAppHandcoded
         }
 
 
-        public void printList()
+        public void PrintList()
         {
             if (head == null)
             {
@@ -110,7 +112,7 @@ namespace TFLAppHandcoded
             }
         }
 
-        public O deleteHead()
+        public O DeleteHead()
         {
             O deletedItem = head.getItem();
             head = head.getNext();
@@ -118,7 +120,7 @@ namespace TFLAppHandcoded
             return deletedItem;
         }
 
-        public void insertAtTail(O newItem, W newItemWeight)
+        public void InsertAtTail(O newItem, W newItemWeight)
         {
             WeightedListNode<O, W> lastNode = head;
             for (int i = 1; i < length; i++)

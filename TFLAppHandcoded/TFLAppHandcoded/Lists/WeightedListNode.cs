@@ -27,7 +27,7 @@ namespace TFLAppHandcoded
             this.next = next;
         }
 
-        public void print()
+        public void Print()
         {
             Console.Write($"The node value: {item.ToString()}, the next node value");
             if (next != null)
@@ -41,32 +41,32 @@ namespace TFLAppHandcoded
             }
         }
 
-        public void setItem(O item)
+        public void SetItem(O item)
         {
             this.item = item;
         }
 
-        public void setWeight(W weight)
+        public void SetWeight(W weight)
         {
             this.weight = weight;
         }
 
-        public void setNext(WeightedListNode<O, W> next)
+        public void SetNext(WeightedListNode<O, W> next)
         {
             this.next = next;
         }
 
-        public O getItem()
+        public O GetItem()
         {
             return this.item;
         }
 
-        public W getWeight()
+        public W GetWeight()
         {
             return this.weight;
         }
 
-        public WeightedListNode<O, W> getNext()
+        public WeightedListNode<O, W> GetNext()
         {
             return this.next;
         }
