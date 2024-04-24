@@ -14,6 +14,7 @@ namespace TFLAppHandcoded
         }
 
         public bool IsEmpty() { return this.length == 0; }
+        public int GetLength() { return this.length; }
         public WeightedListNode<O, W>? GetHead() { return this.head; }
 
         private WeightedListNode<O, W>? FindItem(O item)

@@ -15,6 +15,7 @@ namespace TFLAppHandcoded
         }
 
         public bool IsEmpty() { return this.length == 0; }
+        public int GetLength() { return this.length; }
         public DLListNode<T>? GetHead() { return this.head; }
 
         private DLListNode<T>? FindItem(T item)
