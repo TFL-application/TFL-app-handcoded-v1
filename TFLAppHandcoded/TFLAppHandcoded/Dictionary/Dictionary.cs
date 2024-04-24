@@ -7,16 +7,16 @@ namespace TFLAppHandcoded.Dictionary
 
         public Dict()
 		{
-			dictionary = new DictionaryRecord<K, V>[0];
+			this.dictionary = new DictionaryRecord<K, V>[0];
         }
 
-		public int GetLength() { return dictionary.Length; }
+		public int GetLength() { return this.dictionary.Length; }
 
         public K[] GetDictionaryRecordKeys()
         {
-            K[] keys = new K[dictionary.Length];
-            for (int i = 0; i < dictionary.Length; i++)
-                keys[i] = dictionary[i].key;
+            K[] keys = new K[this.dictionary.Length];
+            for (int i = 0; i < this.dictionary.Length; i++)
+                keys[i] = this.dictionary[i].key;
 
             return keys;
         }
@@ -41,11 +41,11 @@ namespace TFLAppHandcoded.Dictionary
 
             for (int i = 0; i < newLength - 1; i++)
             {
-                if (dictionary[i].Equals(key))
+                if (this.dictionary[i].Equals(key))
                     return false;
                 newDictionary[i] = this.dictionary[i];
             }
-            newDictionary[dictionary.Length] = newRecord;
+            newDictionary[this.dictionary.Length] = newRecord;
 
             this.dictionary = newDictionary;
 
@@ -54,7 +54,7 @@ namespace TFLAppHandcoded.Dictionary
 
         public bool DeleteRecordWithKey(K key)
         {
-            int newLength = dictionary.Length - 1;
+            int newLength = this.dictionary.Length - 1;
             DictionaryRecord<K, V>[] newDictionary = new DictionaryRecord<K, V>[newLength];
 
             int newArrayIndex = 0;
