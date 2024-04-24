@@ -12,7 +12,7 @@ namespace TFLAppHandcoded.Dictionary
 			this.value = value;
 		}
 
-		public bool Equals(K? other)
+		public bool Equals(K? other)		// A record equals to another one if they have the same key
 		{
 			if (this.key.Equals(other))
 				return true;

@@ -1,68 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TFLAppHandcoded
 {
-    public class ListNode
+    public class ListNode<T>
     {
-        private Object item ;
-        private ListNode next ;
+        private T? item ;
+        private ListNode<T>? next ;
 
-        public ListNode()
-        {
-            item = null ;
-            next = null ;
-        }
-
-        public ListNode( Object item )
+        public ListNode(T item)
         {
             this.item = item ;
             this.next = null ;
         }
 
-        public ListNode( Object item, ListNode next)
+        public ListNode(T item, ListNode<T>? next)
         {
             this.item = item ;
             this.next = next ;
         }
 
-        public void print()
-        {
-            Console.Write($"The node value: {item.ToString()}, the next node value");
-            if (next != null)
-            {
-                Object nextValue = next.getItem();
-                Console.WriteLine($": {nextValue.ToString()}");
-            }
-            else
-            {
-                Console.WriteLine($" is null");
-            }
-        }
+        public void SetItem( T? item ) {  this.item = item ; }
+        public void SetNext( ListNode<T>? next ) { this.next = next ; }
 
-        public void setItem( Object item ) 
-        { 
-            this.item = item ; 
-        }
-
-        public void setNext( ListNode next ) 
-        { 
-            this.next = next ; 
-        }
-
-        public Object getItem() 
-        { 
-            return this.item ; 
-        }
-
-        public ListNode getNext() 
-        { 
-            return this.next ; 
-        }
-
-    }  // ListNode
-
+        public T? GetItem() { return this.item ; }
+        public ListNode<T>? GetNext() { return this.next ; }
+    } 
 }

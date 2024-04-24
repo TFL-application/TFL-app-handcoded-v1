@@ -1,136 +1,82 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFLAppHandcoded
 {
     public class WeightedLinkedList<O, W>
     {
-        protected WeightedListNode<O, W> head = null;   // points to the head of the list
-        protected int length = 0;      // number of nodes in the list
+        protected WeightedListNode<O, W>? head;   // points to the head of the list
+        protected int length;      // number of nodes in the list
 
         public WeightedLinkedList()
         {
-            head = null;   // empty list
-            length = 0;      // no nodes in the list
+            this.head = null;
+            this.length = 0;
         }
 
-        public WeightedListNode<O, W> GetHead() { return head; }
+        public bool IsEmpty() { return this.length == 0; }
+        public WeightedListNode<O, W>? GetHead() { return this.head; }
 
-        public bool IsEmpty()
+        private WeightedListNode<O, W>? FindItem(O item)
         {
-            return (length == 0);       // or ( head == null )
+            if (!IsEmpty())
+            {
+                WeightedListNode<O, W>? current = this.head;
+
+                while (current != null && !item.Equals(current.GetItem()))
+                    current = current.GetNext();
+
+                return current;
+            }
+            return null;
         }
 
         public void InsertAtHead(O item, W weight)
         {
-            WeightedListNode<O, W> newItem = new WeightedListNode<O, W>(item, weight, head);  // .next ) ;
-
-            head = newItem;
-
-            length++;
-        }
-
-        // *** HAS A BUG? - so use Equals not != in while ***
-        private WeightedListNode<O, W> FindItem(O item)
-        {
-            if (!isEmpty())
-            {
-                WeightedListNode<O, W> current = new WeightedListNode<O, W>();
-
-                current = head;
-
-                while ((current != null) && (!(item.Equals(current.getItem()))))
-                {
-                    //Console.WriteLine();
-                    //Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
-                    //Console.WriteLine();
-
-                    current = current.getNext();
-                }
-
-                //Console.WriteLine();
-                //Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
-                //Console.WriteLine();
-
-                return current;
-            }
-            else
-            {
-                //Console.WriteLine();
-                //Console.WriteLine("findItem: afterNode = null");
-                //Console.WriteLine();
-
-                return null;
-            }
+            WeightedListNode<O, W> newItem = new WeightedListNode<O, W>(item, weight, this.head);
+            this.head = newItem;
+            this.length++;
         }
 
         public bool InsertAfter(O newItem, W newItemWeight, O afterItem)
         {
-            WeightedListNode<O, W> afterNode = findItem(afterItem);  // find the afterItem's node
+            WeightedListNode<O, W>? afterNode = FindItem(afterItem);
 
-            if (afterNode != null)    // afterItem in list
+            if (afterNode != null)  
             {
+                WeightedListNode<O, W> newItemNode =
+                    new WeightedListNode<O, W>(newItem, newItemWeight, afterNode.GetNext());
 
-                // create newItem's node & set its next to afterItem's next
-                WeightedListNode<O, W> newItemNode = new WeightedListNode<O, W>(newItem, newItemWeight, afterNode.getNext());
-
-                afterNode.setNext(newItemNode);
-
-                length++;
-
+                afterNode.SetNext(newItemNode);
+                this.length++;
                 return true;
             }
-            else
-            {    // afterItem not in list
-                return false;
-            }
-        }
-
-
-        public void PrintList()
-        {
-            if (head == null)
-            {
-                Console.WriteLine("List is empty");
-            }
-            else
-            {
-                WeightedListNode<O, W> current = new WeightedListNode<O, W>();
-
-                current = head;
-
-                Console.WriteLine("Items in the list are:");
-
-                while (current != null)   // not at end of the list
-                {
-                    // Console.WriteLine( current.getItem().ToString() ) ;
-                    current.print();
-                    current = current.getNext();
-                }
-            }
-        }
-
-        public O DeleteHead()
-        {
-            O deletedItem = head.getItem();
-            head = head.getNext();
-            length--;
-            return deletedItem;
+            return false;
         }
 
         public void InsertAtTail(O newItem, W newItemWeight)
         {
-            WeightedListNode<O, W> lastNode = head;
-            for (int i = 1; i < length; i++)
+            if (!this.IsEmpty())
             {
-                lastNode = head.getNext();
+                WeightedListNode<O, W>? lastNode = this.head;
+                for (int i = 1; i < this.length; i++)
+                    lastNode = lastNode.GetNext();
+
+                lastNode.SetNext(new WeightedListNode<O, W>(newItem, newItemWeight));
+            }
+            else
+            {
+                this.InsertAtHead(newItem, newItemWeight);
             }
 
-            lastNode.setNext(new WeightedListNode<O, W>(newItem, newItemWeight));
-            length++;
+            this.length++;
         }
-    }  // LinkedList
 
+        public O? DeleteHead()
+        {
+            O? deletedItem = this.head.GetItem();
+            this.head = this.head.GetNext();
+            this.length--;
+            return deletedItem;
+        }
+    } 
 }

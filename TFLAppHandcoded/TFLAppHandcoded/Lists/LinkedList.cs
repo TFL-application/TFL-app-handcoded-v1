@@ -1,135 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TFLAppHandcoded
 {
-    public class LinkedList
+    public class LinkedList<T>
     {
-        protected ListNode head   = null ;   // points to the head of the list
-        protected int      length = 0 ;      // number of nodes in the list
+        protected ListNode<T>? head;
+        protected int length;
 
         public LinkedList()
         {
-            head   = null ;   // empty list
-            length = 0 ;      // no nodes in the list
+            this.head   = null ;
+            this.length = 0 ;
         }
 
-        public int GetLength() { return length; }
-        public Object GetHeadValue() { return head.getItem(); }
+        public bool IsEmpty() { return this.length == 0; }
 
-        public bool isEmpty()
+        private ListNode<T>? FindItem(T item)
         {
-            return ( length == 0 ) ;       // or ( head == null )
-        }
-
-        public void insertAtHead( Object item )
-        {
-            ListNode newItem = new ListNode( item, head ) ;  // .next ) ;
-
-            head = newItem ;
-
-            length++;
-        }
-
-        // *** HAS A BUG? - so use Equals not != in while ***
-        private ListNode findItem(Object item )
-        {
-            if ( !isEmpty() )
+            if (!this.IsEmpty())
             {
-                ListNode current = head ;
+                ListNode<T>? current = this.head;
 
-                while ( (current != null) && ( !( item.Equals( current.getItem() ) ) ) )
+                while ((current != null) && (!(item.Equals(current.GetItem()))))
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
-                    Console.WriteLine();
-
-                    current = current.getNext();
+                    current = current.GetNext();
                 }
 
-                Console.WriteLine();
-                Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
-                Console.WriteLine();
-
-                return current ;
+                return current;
             }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("findItem: afterNode = null");
-                Console.WriteLine();
-
-                return null;
-            }
+            return null;
         }
 
-        public bool insertAfter(Object newItem, Object afterItem )
+        public void InsertAtHead( T item )
         {
-            ListNode afterNode = findItem( afterItem ) ;  // find the afterItem's node
+            ListNode<T> newItem = new ListNode<T>( item, this.head ) ;
+            this.head = newItem ;
+            this.length++;
+        }
 
-            if ( afterNode != null )    // afterItem in list
+        public bool InsertAfter( T newItem, T afterItem )
+        {
+            ListNode<T>? afterNode = FindItem( afterItem ) ;
+
+            if ( afterNode != null )
             {
+                ListNode<T> newItemNode = new ListNode<T>( newItem, afterNode.GetNext() ) ;
 
-                // create newItem's node & set its next to afterItem's next
-                ListNode newItemNode = new ListNode( newItem, afterNode.getNext() ) ;
+                afterNode.SetNext( newItemNode ) ;
 
-                afterNode.setNext( newItemNode ) ;
-
-                length++ ;
+                this.length++ ;
 
                 return true ;
             }
-            else
-            {    // afterItem not in list
-                return false ;
-            }
+            return false ;
         }
 
-
-        public void printList()
+        public void InsertAtTail(T item)
         {
-            if ( head == null )
-            {
-                Console.WriteLine("List is empty");
-            }
-            else
-            {
-                ListNode current = head;
-
-                Console.WriteLine("Items in the list are:");
-
-                while ( current != null )   // not at end of the list
-                {
-                    // Console.WriteLine( current.getItem().ToString() ) ;
-                    current.print();
-                    current = current.getNext() ;
-                }
-            }
-        }
-
-        public Object deleteHead()
-        {
-            T deletedItem = head.getItem();
-            head = head.getNext();
-            length--;
-            return deletedItem;
-        }
-
-        public void insertAtTail(Object item)
-        {
-            ListNode lastNode = head;
+            ListNode<T>? lastNode = this.head;
             for (int i = 1; i < length; i++)
             {
-                lastNode = head.getNext();
+                lastNode = lastNode.GetNext();
             }
 
-            lastNode.setNext(new ListNode(item));
-            length++;
+            lastNode.SetNext(new ListNode<T>(item));
+            this.length++;
         }
 
-    }  // LinkedList
-
+        public T? DeleteHead()
+        {
+            T? deletedItem = this.head.GetItem();
+            this.head = this.head.GetNext();
+            this.length--;
+            return deletedItem;
+        }
+    }
 }
