@@ -44,7 +44,8 @@ namespace TFLAppHandcoded
 				foreach (WeightedLinkedList<IStation, double> stationPath
 					in unknownStations.GetRecordKeys())
 				{
-					double stationPathTime = unknownStations.FindRecordValueWithKey(stationPath);
+					double stationPathTime
+                        = unknownStations.FindRecordValueWithKey(stationPath);
 
                     if (stationPathTime > minTime)
 					{
@@ -74,6 +75,8 @@ namespace TFLAppHandcoded
                 // Set their costs = cost of selected station + distances between them
                 // and put them in connected vertices
 
+                // >>>>> Steps 6-13 can be transferred to 5.1 and 5.2 cycles for faster speed <<<<<
+
                 // 5.1. Find next stations in line
                 ILine selectedStationLine = selectedStation.GetLine();
                 WeightedLinkedList<IStation, ITrack> connectedStationsOnTheLine
@@ -87,39 +90,104 @@ namespace TFLAppHandcoded
 				{
                     if (selectedConnectedStationOnTheLine.GetWeight().GetIsOpen())
 					{
-                        IStation selectedConnectedStation = selectedConnectedStationOnTheLine.GetItem();
-                        double selectedConnectedStationTime = selectedConnectedStationOnTheLine.GetWeight().GetTravelTime();
+                        IStation selectedConnectedStation
+                            = selectedConnectedStationOnTheLine.GetItem();
+                        double selectedConnectedStationTime
+                            = selectedConnectedStationOnTheLine.GetWeight().GetTravelTime();
 
                         WeightedLinkedList<IStation, double> connectedStationList
                             = new WeightedLinkedList<IStation, double>();
 
-                        connectedStationList.InsertAtHead(selectedConnectedStation, selectedConnectedStationTime);
-                        connectedStationList.GetHead().SetNext(selectedStationPath.GetHead());
-                        connectedStations.AddRecord(connectedStationList, minTime + selectedConnectedStationTime);
+                        connectedStationList.InsertAtHead
+                            (selectedConnectedStation, selectedConnectedStationTime);
+                        connectedStationList.GetHead().SetNext
+                            (selectedStationPath.GetHead());
+                        connectedStations.AddRecord
+                            (connectedStationList, minTime + selectedConnectedStationTime);
                     }
 
-                    selectedConnectedStationOnTheLine = selectedConnectedStationOnTheLine.GetNext();
+                    selectedConnectedStationOnTheLine
+                        = selectedConnectedStationOnTheLine.GetNext();
                 }
 
                 // 5.b. Find changes
-                IStation[] connectedStationsOtherLines = selectedStation.GetConnections();
+                IStation[] connectedStationsOtherLines
+                    = selectedStation.GetConnections();
                 foreach (IStation station in connectedStationsOtherLines)
                 {
                     WeightedLinkedList<IStation, double> connectedStationList
                             = new WeightedLinkedList<IStation, double>();
 
-                    connectedStationList.InsertAtHead(station, this.changeLineTime);
-                    connectedStationList.GetHead().SetNext(selectedStationPath.GetHead());
+                    connectedStationList.InsertAtHead
+                        (station, this.changeLineTime);
+                    connectedStationList.GetHead().SetNext
+                        (selectedStationPath.GetHead());
 
-                    connectedStations.AddRecord(connectedStationList, minTime + this.changeLineTime);
+                    connectedStations.AddRecord
+                        (connectedStationList, minTime + this.changeLineTime);
                 }
 
-                ////
+                // 6. Check if there are vertices in connected stations
                 if (connectedStations.GetLength() > 0)
                 {
-                    foreach (WeightedLinkedList<IStation, double> path in connectedStations.GetRecordKeys())
+                    // 7. Start the cycle over connected vertices
+                    foreach (WeightedLinkedList<IStation, double> path
+                        in connectedStations.GetRecordKeys())
                     {
+                        // 8.Check if it is in known stations
 
+                        // >>>>>>>> CAN BE A SEPARATE FUNCTION <<<<<<<<<<
+                        bool isKnown = false;
+                        foreach (WeightedLinkedList<IStation, double> knownStationPath
+                            in knownStations.GetRecordKeys())
+                        {
+                            if (path.GetHead().GetItem()
+                                == knownStationPath.GetHead().GetItem())
+                            {
+                                isKnown = true;
+                            }
+                        }
+                        // >>>>>>>> CAN BE A SEPARATE FUNCTION <<<<<<<<<<
+
+                        if (!isKnown)
+                        {
+                            // 9.Check if it is in unknown stations
+
+                            // >>>>>>>> CAN BE A SEPARATE FUNCTION <<<<<<<<<<
+                            WeightedLinkedList<IStation, double>? isUnknown = null;
+                            foreach (WeightedLinkedList<IStation, double> unknownStationPath
+                                in unknownStations.GetRecordKeys())
+                            {
+                                if (path.GetHead().GetItem()
+                                    == unknownStationPath.GetHead().GetItem())
+                                {
+                                    isUnknown = unknownStationPath;
+                                }
+                            }
+                            // >>>>>>>> CAN BE A SEPARATE FUNCTION <<<<<<<<<<
+
+                            if (isUnknown != null)
+                            {
+                                // 10. Check if its cost in connected vertices < the cost
+                                // of the in the unknown stations
+                                if (connectedStations.FindRecordValueWithKey(path)
+                                    < unknownStations.FindRecordValueWithKey(isUnknown))
+                                {
+                                    // 11.a. Set the cost of the connected vertex in the unknown stations
+                                    // = the cost of the edge in the connected vertices
+                                    unknownStations.DeleteRecordWithKey(isUnknown);
+                                }
+                            }
+                            // 11.b. Put it to unknown stations
+                            unknownStations.AddRecord(path, connectedStations.FindRecordValueWithKey(path));
+
+                            // NO NEED TO DO THIS IT WAS DONE ON THE Step 5
+                            // 12. Set previous nodes list of the connected vertex in the unknown stations
+                            // = selected vertex previous nodes list + create last node for the connected node
+                        }
+
+                        // 13. Remove connected vertex from connected stations
+                        connectedStations.DeleteRecordWithKey(path);
                     }
                 }
             }
