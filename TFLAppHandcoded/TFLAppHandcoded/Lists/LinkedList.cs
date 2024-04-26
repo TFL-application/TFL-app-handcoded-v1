@@ -32,6 +32,14 @@ namespace TFLAppHandcoded
             return null;
         }
 
+        public bool IsItemIn(T item)
+        {
+            if (this.FindItem(item) != null)
+                return true;
+
+            return false;
+        }
+
         public void InsertAtHead( T item )
         {
             ListNode<T> newItem = new ListNode<T>( item, this.head ) ;
@@ -74,6 +82,37 @@ namespace TFLAppHandcoded
             this.head = this.head.GetNext();
             this.length--;
             return deletedItem;
+        }
+
+        public bool DeleteItem(T item)
+        {
+            ListNode<T> currentNode = this.head;
+            ListNode<T> nextNode = currentNode.GetNext();
+            while (nextNode != null)
+            {
+                if (nextNode.GetItem().Equals(item))
+                {
+                    currentNode.SetNext(nextNode.GetNext());
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public T[] ToArray()
+        {
+            T[] array = new T[this.length];
+            ListNode<T> currentNode = this.head;
+            int i = 0;
+
+            while (currentNode != null)
+            {
+                array[i] = currentNode.GetItem();
+                currentNode = currentNode.GetNext();
+                i++;
+            }
+
+            return array;
         }
     }
 }
