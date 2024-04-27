@@ -8,12 +8,12 @@ namespace TFLAppHandcoded.Interfaces
     {
         ILine[] GetLines();
         IStation GetStation(string name);
-        DLinkedList GetAllStation(ILine line);
+        IStation[] GetAllStation(ILine line);
         void AddTimeDelay(string stationFrom, string stationTo, double time, bool bothDirections);
         void DeleteTimeDelay(ITrack track);
         void CloseTrack(string stationFrom, string stationTo, double time, bool bothDirections);
         void OpenTrack(ITrack track);
-        LinkedList FindShortestPath(IStation start, IStation destination);
+        WeightedLinkedList<IStation, double> FindShortestPath(IStation start, IStation destination);
     }
 }
 
