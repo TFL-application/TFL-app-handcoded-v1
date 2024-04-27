@@ -1,0 +1,14 @@
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.GeneratedMSBuildEditorConfig.editorconfig
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.AssemblyInfoInputs.cache
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.AssemblyInfo.cs
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.csproj.CoreCompileInputs.cache
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/bin/Debug/net7.0/TFLAppHandcoded
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/bin/Debug/net7.0/TFLAppHandcoded.deps.json
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/bin/Debug/net7.0/TFLAppHandcoded.runtimeconfig.json
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/bin/Debug/net7.0/TFLAppHandcoded.dll
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/bin/Debug/net7.0/TFLAppHandcoded.pdb
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.dll
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/refint/TFLAppHandcoded.dll
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.pdb
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.genruntimeconfig.cache
+/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/ref/TFLAppHandcoded.dll

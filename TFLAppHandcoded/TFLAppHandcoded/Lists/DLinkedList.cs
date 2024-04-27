@@ -1,219 +1,109 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFLAppHandcoded
 {
-    // Lecture 3
-    // Doubly Linked List class 
 
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // WARNING: when updating a node's item, next or previous values remember that
-    //          all of these could be "null". this means that you are trying to call:
-    //          null.setNext(  node ) or null.getPrevious(), etc
-    //          and all of these will cause a "run time ERROR".  so test to make 
-    //          sure they are not "null" before calling a method on them.  
-    //
-    //          This is why there are a lot of "if (XXX != null) " tests in the code. 
-    ///////////////////////////////////////////////////////////////////////////////
-
-    public class DLinkedList
+    public class DLinkedList<T>
     {
-        private const DLListNode NO_NODE          = null ;  // increases readbility 
-        private const DLListNode NO_PREVIOUS_NODE = null ;  // better than "null" everywhere
-        private const DLListNode NO_NEXT_NODE     = null ;
-
-        // List "data structure": 
-        protected DLListNode head   = NO_NODE;   // points to the head of the list
-        protected int        length = 0 ;        // number of nodes in the list
+        private DLListNode<T>? head;
+        private int length;
 
         public DLinkedList()
         {
-            head   = NO_NODE ;    // empty list
-            length = 0 ;          // no nodes in the list
+            this.head = null;
+            this.length = 0;
         }
 
-        public bool isEmpty()
+        public bool IsEmpty() { return this.length == 0; }
+        public DLListNode<T>? GetHead() { return this.head; }
+
+        private DLListNode<T>? FindItem(T item)
         {
-            return ( length == 0 );       // or ( head == NO_NODE )
-        }
+            DLListNode<T>? current = head;
 
-        // 2 cases: (a) empty list, (b) non-empty list
-        public void insertAtHead( Object item )
-        {
-            // creat a new head node for the item
-            DLListNode newItemNode = new DLListNode( item, NO_PREVIOUS_NODE, head ) ;
-
-            if ( head != NO_NODE)                   // check if empty list, i.e. no head node exists)
-            { 
-                // (b) non-empty list
-                head.setPrevious( newItemNode ) ;   // set current head's previous link to the new head, i.e. newItemNode
-            }
-
-            // make newItemNode the head node
-            head = newItemNode ;
-            length++ ;
-        }
-
-
-        private DLListNode findItem( Object item )
-        {
-            DLListNode current = new DLListNode() ;  // use current node to point to nodes as traverse the list
-
-            current = head;                          // start at the head node
-
-            // while not reached end of the list & not found the item continue traversal
-            while ( ( current != NO_NODE ) && ( !item.Equals( current.getItem() ) ) )
-            {
-                Console.WriteLine("findItem: current.item = " + current.getItem().ToString());
-
-                current = current.getNext();  // move to next node in the list
-            }
-
-            if (current != NO_NODE)
-            {
-                    Console.WriteLine("findItem: FOUND current.item = " + current.getItem().ToString());
-                    Console.WriteLine();
-            }
-            else 
-            {
-                Console.WriteLine("findItem: DID NOT FIND item = " + item.ToString());
-                Console.WriteLine();
-            }
+            while (current != null && !item.Equals(current.GetItem()))
+                current = current.GetNext();
 
             return current;
-           
         }
 
-        public bool insertAfter(Object newItem, Object afterItem)
+        public void InsertAtHead(T item)
         {
-            Console.WriteLine("insertAfter( {0}, {1} ): search for {1} node", newItem.ToString(), afterItem.ToString() ) ;
-            Console.WriteLine();
+            DLListNode<T> newItemNode = new DLListNode<T>( item, null, this.head ) ;
 
-            DLListNode afterNode = findItem( afterItem ) ;  // find the afterItem's node
+            if (this.head != null)
+                this.head.SetPrevious(newItemNode);
 
-            if (afterNode != NO_NODE )
-            {   
-                // afterItem in list
-                // create newItem's node, connect to its neighbour nodes, by setting its:
-                // item     <-- newItem
-                // previous <-- afterItem
-                // next     <-- afterItem's next node
-
-                DLListNode newItemNode = new DLListNode( newItem, afterNode, afterNode.getNext() );
-
-                // connect newItem's neighbour nodes to itself by updating their links:
-                newItemNode.getPrevious().setNext( newItemNode ) ;       // previous node's next --> newItem node
-
-                if (newItemNode.getNext() != NO_NEXT_NODE )              // check next node exists
-                {
-                    newItemNode.getNext().setPrevious( newItemNode );    // next node's previous --> newItem node
-                }
-
-                length++ ;  // added a node
-
-                return true ;
-            }
-            else
-            {    // afterItem not in list
-                return false ;
-            }
+            this.head = newItemNode;
+            this.length++;
         }
 
-        // Item Node Deletion 3 case to consider: 
-	//   (a) item not in list, 
-	//   (b) item is head of list, 
-	//   (c) item is in the list but not the head 
-
-        public bool DeleteItem(Object deleteItem)
+        public bool InsertAfter(T newItem, T afterItem)
         {
-            Console.WriteLine("DeleteItem( {0} ): search for {0} node", deleteItem.ToString() ) ;
-            Console.WriteLine();
+            DLListNode<T>? afterNode = FindItem(afterItem);
 
-            DLListNode deleteItemNode = findItem(deleteItem);  // find the deleteItem's node in the list
-
-            if ( deleteItemNode == NO_NODE )
+            if (afterNode != null)
             {
-                // CASE (a) deleteItem is not in the list
+                DLListNode<T> newItemNode = new DLListNode<T>(newItem, afterNode, afterNode.getNext());
 
-                // ************************************************* 
-                // ****** TUTORIAL EXERCISE: INSERT CODE HERE ****** 
-                // *************************************************
+                newItemNode.GetPrevious().SetNext(newItemNode);
 
-                Console.WriteLine("Item is not found in the list");
-            }
-            else
-            {
-                if ( deleteItemNode == head )
-                {
-                    // CASE (b) deleteItem is the head node
-                    Console.WriteLine("DeleteItem( {0} ): found as head of list", deleteItemNode.getItem());
+                if (newItemNode.GetNext() != null)
+                    newItemNode.GetNext().SetPrevious( newItemNode );
 
-                    // delete current head by making its next node the new head, i.e. 2nd node or null if no 2nd node. 
-
-                    // ************************************************* 
-                    // ****** TUTORIAL EXERCISE: INSERT CODE HERE ****** 
-                    // *************************************************
-
-                    head = deleteItemNode.getNext();
-                    head.setPrevious(null);
-
-                    Console.WriteLine("DeleteItem( {0} ): deleted head of list", deleteItemNode.getItem() );
-                }
-                else
-                {
-                    // CASE (c): deleteItem is in list but not the head
-
-                    // disconnect deleteItem's node from its neighbour nodes, by updating their links:
-
-                    // *************************************************
-                    // ****** TUTORIAL EXERCISE: INSERT CODE HERE ****** 
-                    // *************************************************
-
-                    DLListNode nextItemNode = deleteItemNode.getNext();
-                    DLListNode previousItemNode = deleteItemNode.getPrevious();
-
-                    nextItemNode.setPrevious(previousItemNode);
-                    previousItemNode.setNext(nextItemNode);
-
-                    Console.WriteLine("DeleteItem( {0} ): deleted ", deleteItemNode.getItem());
-                }
-
-                length--;     // deleted a node
-                return true ;
+                this.length++;
+                return true;
             }
             return false;
         }
 
-
-        public void printList()
+        public void InsertAtTail(T newItem)
         {
-            if ( head == NO_NODE )
+            if (!this.IsEmpty())
             {
-                Console.WriteLine("List is empty");
+                DLListNode<T>? lastNode = this.head;
+                for (int i = 1; i < this.length; i++)
+                    lastNode = lastNode.GetNext();
+
+                lastNode.SetNext(new DLListNode<T>(newItem, lastNode, null));
             }
             else
             {
-                DLListNode current = new DLListNode() ;
-
-                current = head ;
-
-                Console.WriteLine( "{0} Items in the list are:", length ) ;
-
-                while (current != NO_NEXT_NODE )   // not at end of the list
-                {
-                    current.print();
-
-                    current = current.getNext() ;
-                }
+                this.InsertAtHead(newItem);
             }
+
+            this.length++;
         }
 
-    }  // DLinkedList
+        public bool DeleteItem(T deleteItem)
+        {
+            DLListNode<T>? deleteItemNode = FindItem(deleteItem);
 
-} // Lecture_3
+            if (deleteItemNode != null)
+            {
+                DLListNode<T>? previousNode = deleteItemNode.GetPrevious();
+                DLListNode<T>? nextNode = deleteItemNode.GetNext();
 
-
+                if (deleteItemNode == this.head)
+                {
+                    this.head = nextNode;
+                    if (nextNode != null)
+                        deleteItemNode.SetPrevious(null);
+                }
+                else if (nextNode == null)
+                {
+                    previousNode.SetNext(null);
+                }
+                else
+                {
+                    previousNode.SetNext(nextNode);
+                    nextNode.SetPrevious(previousNode);
+                }
+       
+                length--; 
+                return true;
+            }
+            return false;
+        }
+    }
+}
