@@ -3,10 +3,27 @@ using TFLAppHandcoded.Interfaces;
 
 namespace TFLAppHandcoded{
 
+    public class NetworkData
+    {
+        public Dictionary<string, Line> Lines { get; private set; }
+    }
+
     public class Network:INetwork{
+        private NetworkData networkData;
         private Line[]lines;
         private LinkedList<Track> closedTracks;
         private LinkedList<Track> delayedTracks;
+
+        public Network(NetworkData networkData)
+        {
+            this.networkData = networkData;
+            InitilizeNetwork(networkData);
+        }
+
+        private void InitilizeNetwork(networkData)
+        {
+            var circleBakerStreet = new Station("Baker Street");
+        }
 
         public Network(){}
         public Line GetLines(){}
