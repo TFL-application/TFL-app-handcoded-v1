@@ -9,6 +9,8 @@ namespace TFLAppHandcoded{
     }
 
     public class Network:INetwork{
+
+
         private NetworkData networkData;
         private Line[]lines;
         private LinkedList<Track> closedTracks;
@@ -26,11 +28,34 @@ namespace TFLAppHandcoded{
         }
 
         public Network(){}
-        public Line GetLines(){}
+
+
+        //return type void is added because it might be required for the menu to display line
+        public void GetLines(){
+            int lineLength=lines.length();
+            try{
+                if(lineLength<=0){
+                    throw new ArgumentException("No valid Data to Show");
+                }
+
+                for(int i=0;i<lineLength;i++){
+                    Console.Writeline($"Line : {lines[i].name}");
+                    Console.Writeline($"Line : {lines[i].color}");
+                }
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+
+
+        }
+
+
         public string GetStation(string name){
             try{
-                foreach(line in lines){
-                    if(line.GetStation()==name){
+                foreach(Line line in lines){
+                    if(line.GetStation().GetName()==name){
                         return line.GetStation();
                 }
 
@@ -41,10 +66,12 @@ namespace TFLAppHandcoded{
             }
             
             }
+
+
         public IStation GetAllStation(ILine line){
 
             try{
-                foreach (line in lines){
+                foreach (Line line in lines){
                 if(this.line.GetName()==line.GetName()){
                     return line.GetAllStations();
                 }
@@ -85,7 +112,31 @@ namespace TFLAppHandcoded{
 
 
         }
-        public void DeleteTimeDelay(Track track){
+
+        //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
+        public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, double time,bool bothDirections){
+              try{
+               foreach(Iline line in lines){
+
+                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
+                if (line.GetName()==l.GetName()){
+
+                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
+
+                        //for removing time delay The previously set delay is set back to 0.0
+                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(0.0);
+                    }
+                    if (bothDirections){
+                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(0.0);
+                    }
+
+                }
+               }
+
+            }catch(Exception ex){
+                    Console.WriteLine("An error occured:",ex.message);
+            }
 
         }
 
@@ -102,7 +153,7 @@ namespace TFLAppHandcoded{
                         line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(false);
                     }
                     if (bothDirections){
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(false);
+                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(false);
                     }
 
                 }
@@ -112,7 +163,36 @@ namespace TFLAppHandcoded{
                     Console.WriteLine("An error occured:",ex.message);
             }
         }
-        public void OpenTrack(Track track){}
+
+
+
+
+        public void OpenTrack(line: ILine, stationFrom: string, stationTo: string){
+              try{
+               foreach(Iline line in lines){
+
+                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
+                if (line.GetName()==l.GetName()){
+
+                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
+                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(true);
+                    }
+                    if (bothDirections){
+                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(true);
+                    }
+
+                }
+               }
+
+            }catch(Exception ex){
+                    Console.WriteLine("An error occured:",ex.message);
+            }
+
+        }
+
+
+
         public WeightedLinkedList<Station, double> FindShortestPath(Station start, Station destination){}
 
     }
