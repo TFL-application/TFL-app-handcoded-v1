@@ -12,3 +12,10 @@
 /Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.pdb
 /Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.genruntimeconfig.cache
 /Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/ref/TFLAppHandcoded.dll
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.AssemblyInfoInputs.cache
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.AssemblyInfo.cs
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.csproj.CoreCompileInputs.cache
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.dll
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/refint/TFLAppHandcoded.dll
+/Users/kasiaradek/Desktop/Westminster Unii/SEM2/Data structures & algorithms/groupCW/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/Debug/net7.0/TFLAppHandcoded.pdb

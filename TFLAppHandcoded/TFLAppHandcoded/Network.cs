@@ -16,16 +16,13 @@ namespace TFLAppHandcoded{
         private LinkedList<Track> closedTracks;
         private LinkedList<Track> delayedTracks;
 
-        public Network(NetworkData networkData)
+        public Network()
         {
-            this.networkData = networkData;
-            InitilizeNetwork(networkData);
+            NetworkInitializer initializer = new NetworkInitializer();
+            networkData = initializer.InitializeNetwork();
         }
 
-        private void InitilizeNetwork(networkData)
-        {
-            var circleBakerStreet = new Station("Baker Street");
-        }
+        
 
         public Network(){}
 

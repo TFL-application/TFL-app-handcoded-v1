@@ -1,7 +1,6 @@
-﻿using System;
-namespace TFLAppHandcoded
+﻿namespace TFLAppHandcoded
 {
-	public class networkData
+    public class networkData
 	{
 		public Dictionary<string, Line> Lines { get; private set; }
 
@@ -12,9 +11,23 @@ namespace TFLAppHandcoded
 		}
 
 		public void AddLine(Line line)
+		{
+			if (line == null)
 			{
-			Lines.Add(line.Name, line);
+				throw new ArgumentNullException(nameof(line));
 			}
+			Lines.Add(line.GetName(), line);
+		}
+
+		public Line GetLine(string lineName)
+		{
+			if (lineName == null)
+			{
+				throw new ArgumentOutOfRangeException(nameof(lineName));
+			}
+			Lines.TryGetValue(lineName, out Line line);
+			return line;
+		}
 	}
 }
 
