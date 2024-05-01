@@ -10,13 +10,13 @@
             Station tottenhamHale = new Station("Tottenham Hale");
             Station sevenSisters = new Station("Seven Sisters");
             Station finsburyPark = new Station("Finsbury Park");
-            Station highburyNislington = new Station("Highbury & Islington");
-            Station kingsCrossStPancras = new Station("King's Cross St Pancras");
+            Station VhighburyNIslington = new Station("Highbury & Islington");
+            Station VkingsCrossStPancras = new Station("King's Cross St Pancras");
             Station euston = new Station("Euston");
             Station warrenStreet = new Station("Warren Street");
             Station oxfordCircus = new Station("Oxford Circus");
-            Station greenPark = new Station("Green Park");
-            Station victoria = new Station("Victoria");
+            Station VgreenPark = new Station("Green Park");
+            Station Vvictoria = new Station("Victoria");
             Station pimlico = new Station("Pimlico");
             Station vauxhall = new Station("Vauxhall");
             Station stockwell = new Station("Stockwell");
@@ -32,14 +32,14 @@
             Station dollisHill = new Station("Dollis Hill");
             Station willesdenGreen = new Station("Willesden Green");
             Station kilburn = new Station("Kilburn");
-            Station westHampstead = new Station("West Hampstead");
+            Station JwestHampstead = new Station("West Hampstead");
             Station finchleyRoad = new Station("Finchley Road");
             Station swissCottage = new Station("Swiss Cottage");
             Station stJohnsWood = new Station("St. John's Wood");
-            Station bakerStreet = new Station("Baker Street");
+            Station JbakerStreet = new Station("Baker Street");
             Station bondStreet = new Station("Bond Street");
-            Station greenPark = new Station("Green Park");
-            Station westminster = new Station("Westminster");
+            Station JgreenPark = new Station("Green Park");
+            Station Jwestminster = new Station("Westminster");
             Station waterloo = new Station("Waterloo");
             Station southwark = new Station("Southwark");
             Station londonBridge = new Station("London Bridge");
@@ -49,7 +49,68 @@
             Station northGreenwich = new Station("North Greenwich");
             Station canningTown = new Station("Canning Town");
             Station westHam = new Station("West Ham");
-            Station stratford = new Station("Stratford");
+            Station Jstratford = new Station("Stratford");
+
+            //circle line stations
+            Station hammersmith = new Station("Hammersmith");
+            Station goldhawkRoad = new Station("Goldhawk Road");
+            Station shepherdsBush = new Station("Shepherd's Bush");
+            Station latimerRoad = new Station("Latimer Road");
+            Station ladbrokeGrove = new Station("Ladbroke Grove");
+            Station westbournePark = new Station("Westbourne Park");
+            Station royalOak = new Station("Royal Oak");
+            Station paddington = new Station("Paddington");
+            Station CbakerStreet = new Station("Baker Street");
+            Station greatPortlandStreet = new Station("Great Portland Street");
+            Station eustonSquare = new Station("Euston Square");
+            Station CkingsCrossStPancras = new Station("King's Cross St. Pancras");
+            Station farringdon = new Station("Farringdon");
+            Station barbican = new Station("Barbican");
+            Station moorgate = new Station("Moorgate");
+            Station liverpoolStreet = new Station("Liverpool Street");
+            Station aldgate = new Station("Aldgate");
+            Station towerHill = new Station("Tower Hill");
+            Station monument = new Station("Monument");
+            Station cannonStreet = new Station("Cannon Street");
+            Station mansionHouse = new Station("Mansion House");
+            Station blackfairs = new Station("Blackfairs");
+            Station temple = new Station("Temple");
+            Station embankment = new Station("Embankment");
+            Station Cwestminster = new Station("Westminster");
+            Station stJamessPark = new Station("St. James's Park");
+            Station Cvictoria = new Station("Victoria");
+            Station sloanSquare = new Station("Sloan Square");
+            Station southKensington = new Station("South Kensington");
+            Station gloucesterRoad = new Station("Gloucester Road");
+            Station highStreetKensington = new Station("High Street Kensington");
+            Station nottingHillGate = new Station("Notting Hill Gate");
+            Station bayswater = new Station("Bayswater");
+            Station edgwareRoad = new Station("Edgware Road");
+
+            //overground line stations
+            Station richmond = new Station("Richmond");
+            Station kewGardens = new Station("Kew Gardens");
+            Station gunnersbury = new Station("Gunnersbury");
+            Station southActon = new Station("South Acton");
+            Station actonCentral = new Station("Acton Central");
+            Station willesdenJunction = new Station("Willesden Junction");
+            Station kensalRise = new Station("Kensal Rise");
+            Station brondesburyPark = new Station("Brondesbury Park");
+            Station brondesbury = new Station("Brondesbury");
+            Station OwestHampstead = new Station("West Hampstead");
+            Station finchleyRoadNFrognal = new Station("Finchley Road & Frognal");
+            Station hampsteadHeath = new Station("Hampstead Heath");
+            Station gospelOak = new Station("Gospel Oak");
+            Station kentishTownWest = new Station("Kentish Town West");
+            Station camdenRoad = new Station("Camden Road");
+            Station caledonianRoadNBarnsbury = new Station("Caledonian Road & Barnsbury");
+            Station OhighburyNIslington = new Station("Highbury & Islington");
+            Station canonbury = new Station("Canonbury");
+            Station dalstonKingsland = new Station("Dalston Kingsland");
+            Station hackneyCentral = new Station("Hackney Central");
+            Station homerton = new Station("Homerton");
+            Station hackneyWick = new Station("Hackney Wick");
+            Station Ostratford = new Station("Stratford")
 
 
 
@@ -60,13 +121,13 @@
                 tottenhamHale,
                 sevenSisters,
                 finsburyPark,
-                highburyNislington,
-                kingsCrossStPancras,
+                VhighburyNIslington,
+                VkingsCrossStPancras,
                 euston,
                 warrenStreet,
                 oxfordCircus,
-                greenPark,
-                victoria,
+                VgreenPark,
+                Vvictoria,
                 pimlico,
                 vauxhall,
                 stockwell,
@@ -84,14 +145,14 @@
                 dollisHill,
                 willesdenGreen,
                 kilburn,
-                westHampstead,
+                JwestHampstead,
                 finchleyRoad,
                 swissCottage,
                 stJohnsWood,
-                bakerStreet,
+                JbakerStreet,
                 bondStreet,
-                greenPark,
-                westminster,
+                JgreenPark,
+                Jwestminster,
                 waterloo,
                 southwark,
                 londonBridge,
@@ -101,12 +162,83 @@
                 northGreenwich,
                 canaryWharf,
                 westHam,
-                stratford,
+                Jstratford,
 
+            });
+
+            Line circleLine = new Line("Circle", "yellow", new List<Station>()
+            {
+                hammersmith,
+                goldhawkRoad,
+                shepherdsBush,
+                latimerRoad,
+                ladbrokeGrove,
+                westbournePark,
+                royalOak,
+                paddington,
+                CbakerStreet,
+                greatPortlandStreet,
+                eustonSquare,
+                CkingsCrossStPancras,
+                farringdon,
+                barbican,
+                moorgate,
+                liverpoolStreet,
+                aldgate,
+                towerHill,
+                monument,
+                cannonStreet,
+                mansionHouse,
+                blackfairs,
+                temple,
+                embankment,
+                Cwestminster,
+                stJamessPark,
+                Cvictoria,
+                sloanSquare,
+                southKensington,
+                gloucesterRoad,
+                highStreetKensington,
+                nottingHillGate,
+                bayswater,
+                edgwareRoad,
+
+
+
+            });
+
+            Line overgroundLine = new Line("Overground", "Orange", new List<Station>()
+            {
+                richmond,
+                kewGardens,
+                gunnersbury,
+                southActon,
+                actonCentral,
+                willesdenJunction,
+                kensalRise,
+                brondesbury,
+                brondesburyPark,
+                OwestHampstead,
+                finchleyRoadNFrognal,
+                hampsteadHeath,
+                gospelOak,
+                kentishTownWest,
+                camdenRoad,
+                caledonianRoadNBarnsbury,
+                OhighburyNIslington,
+                canonbury,
+                dalstonKingsland,
+                hackneyCentral,
+                homerton,
+                hackneyWick,
+                Ostratford,
             });
 
             networkData.AddLine(victoriaLine);
             networkData.AddLine(jubileeLine);
+            networkData.AddLine(circleLine);
+            networkData.AddLine(overgroundLine);
+
 
         }
     }
