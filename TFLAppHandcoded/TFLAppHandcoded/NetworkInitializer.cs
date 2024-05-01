@@ -110,7 +110,7 @@
             Station hackneyCentral = new Station("Hackney Central");
             Station homerton = new Station("Homerton");
             Station hackneyWick = new Station("Hackney Wick");
-            Station Ostratford = new Station("Stratford")
+            Station Ostratford = new Station("Stratford");
 
 
 
@@ -240,7 +240,10 @@
             networkData.AddLine(overgroundLine);
 
 
+
+            return networkData;
         }
+        
     }
 }
 
