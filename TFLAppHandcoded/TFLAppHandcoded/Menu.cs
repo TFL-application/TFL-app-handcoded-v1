@@ -59,7 +59,7 @@ namespace TFLAppHandcoded{
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**                                                                      **");
-            Console.WriteLine("** Enter Options from 1-4                                               **");
+            Console.WriteLine("** Enter Options from 1-3                                               **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("** 1. Choose Station by Line                                            **");
@@ -80,7 +80,7 @@ namespace TFLAppHandcoded{
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**                                                                      **");
-            Console.WriteLine("** Enter Options from 1-4                                               **");
+            Console.WriteLine("** Enter Options from 1-5                                               **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("** 1. Add Delay                                                         **");
@@ -102,7 +102,7 @@ namespace TFLAppHandcoded{
 
         public void Customer_Operation(int option){
         do{
-        if (option < 1 || option > 4)
+        if (option < 1 || option > 3)
         {
             Console.WriteLine("Invalid option Entered");
         }
@@ -145,7 +145,7 @@ namespace TFLAppHandcoded{
                 CustomerOperations(choice);
                 break;
         }
-        } while (option < 1 || option > 4);
+        } while (option < 1 || option > 3);
          
         }
 
