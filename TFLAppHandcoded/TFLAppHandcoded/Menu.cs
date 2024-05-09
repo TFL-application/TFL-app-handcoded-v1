@@ -1,5 +1,4 @@
-TFLAppHandcoded/TFLAppHandcoded/Menu.cs
-@@ -0,0 +1,291 @@
+using TFLAppHandcoded.Interfaces;
 namespace TFLAppHandcoded{
 
 
@@ -141,8 +140,8 @@ namespace TFLAppHandcoded{
 
             default:
                 Console.WriteLine("Invalid Option Entered! Please choose Valid Option");
-                int choice=Customer_menu();
-                CustomerOperations(choice);
+                int choice= Customer_Menu();
+                Customer_Operation(choice);
                 break;
         }
         } while (option < 1 || option > 3);
@@ -174,13 +173,13 @@ namespace TFLAppHandcoded{
                 string StationEnd = Console.ReadLine();
 
                 Console.WriteLine("Enter Time Delay");
-                double TimeDelay=Convert.Todouble("Enter Time Delay");
+                double TimeDelay=Convert.ToDouble("Enter Time Delay");
 
                 Console.WriteLine("is the Delay in both DIrections? choose between true or false");
                 //calling boolvalue function
                 bool direction=boolValue();
 
-                network.AddTimeDelay(linename,StationStart,StationEnd,TImeDelay,direction);
+                network.AddTimeDelay(linename,StationStart,StationEnd,TimeDelay,direction);
                 break;
 
 
@@ -196,27 +195,27 @@ namespace TFLAppHandcoded{
                 string ToStation = Console.ReadLine();
 
                 Console.WriteLine("Enter Time Delay");
-                double timeDelay=Convert.Todouble(COnsole.ReadLine());
+                double timeDelay=Convert.ToDouble(Console.ReadLine());
 
                 Console.WriteLine("is the Delay in both DIrections? choose between true or false");
                 //calling boolvalue function
                 bool directionVal=boolValue();
 
-                network.DeleteTimeDelay(linename,FromStation,ToStation,TImeDelay,directionVal);
+                network.DeleteTimeDelay(linename,FromStation,ToStation, timeDelay, directionVal);
                 break;
 
             //Case when Enginner chooses to close Track
             case 3:
                
                 Console.WriteLine("Enter Line name to close track");
-                string linename1=Console.ReadLine();
+                string linename2=Console.ReadLine();
 
                 Console.WriteLine("Enter Station name to Close From");
                 string StationA = Console.ReadLine();
 
                 Console.WriteLine("Enter Station name to Close Track  To ");
                 string StationB = Console.ReadLine();
-                network.CloseTrack(StationA,StationB);
+                network.CloseTrack(linename2, StationA, StationB, true);
                 break;
 
 
@@ -242,7 +241,7 @@ namespace TFLAppHandcoded{
 
             default:
                 Console.WriteLine("Invalid Option Entered! Please choose Valid Option");
-                int choice=Engineer_menu();
+                choice=Engineer_Menu();
                 Engineer_Operation(choice);
                 break;
         }

@@ -1,12 +1,18 @@
 ﻿using System;
 using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
+using System.Xml.Linq;
 
 namespace TFLAppHandcoded{
 
     public class NetworkData
     {
-        public Dictionary<string, Line> Lines { get; private set; }
+        public Dictionary<string, Line> lines { get; private set; }
+
+        public NetworkData()
+        {
+            lines = new Dictionary<string, Line>();
+        }
     }
 
     public class Network: INetwork{
@@ -24,9 +30,9 @@ namespace TFLAppHandcoded{
             InitilizeNetwork(networkData);
         }
 
-        private void InitilizeNetwork(networkData)
+        private void InitilizeNetwork(NetworkData networkData)
         {
-            var circleBakerStreet = new Station("Baker Street");
+            var circleBakerStreet = new Station("Baker Street", null);
         }
 
         public Network(){}
@@ -34,15 +40,15 @@ namespace TFLAppHandcoded{
 
         //return type void is added because it might be required for the menu to display line
         public void GetLines(){
-            int lineLength=lines.length();
+            int lineLength=lines.Length;
             try{
                 if(lineLength<=0){
                     throw new ArgumentException("No valid Data to Show");
                 }
 
                 for(int i=0;i<lineLength;i++){
-                    Console.Writeline($"Line : {lines[i].name}");
-                    Console.Writeline($"Line : {lines[i].color}");
+                    Console.WriteLine($"Line : {lines[i].GetName()}");
+                    Console.WriteLine($"Line : {lines[i].GetColor()}");
                 }
             }catch (Exception ex)
             {
@@ -53,38 +59,48 @@ namespace TFLAppHandcoded{
 
         }
 
-
-        public string GetStation(string linename){
-            try{
-                foreach(Line line in lines){
-                    if(line.GetStation().GetName()==linename){
-                        return line.GetStation();
+        // Delete it if not used
+        public IStation GetStation(string stationname){
+            try
+            {
+                foreach (Line line in lines)
+                {
+                    foreach (Station station in line.GetAllStations())
+                    {
+                        if (station.GetName() == stationname)
+                        {
+                            return station;
+                        }
+                    }
                 }
 
-            }}
-             throw new ArgumentException($"Station name : {name} doesnot falls on the line");
-            catch(Exception ex){
-                 Console.WriteLine("An error occured:",ex.message);
-            }
-            
+                throw new ArgumentException($"Station name : {stationname} doesnot falls on the line");
             }
 
-        
-        public IStation GetAllStation(string linename){
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
+            }
+            return null;
+
+        }
+
+
+        public IStation[] GetAllStation(string linename){
 
             try{
                 foreach (Line line in lines){
-                if(this.line.GetName()==linename){
+                if(line.GetName()==linename){
                     return line.GetAllStations();
+                    }
+                    throw new ArgumentException($"Line name {line.GetName()} not Found");
+
                 }
-                
-            }
-            throw new ArgumentException($"Line name {line.GetName()} not Found");
             }
             catch (Exception ex){
-                Console.WriteLine("An error occured:",ex.message);
+                Console.WriteLine("An error occured:",ex.Message);
             }
-            
+            return null;
         }
 
         //I have added Line attirbute:
@@ -92,24 +108,30 @@ namespace TFLAppHandcoded{
 
             // FindRecordValueWithKey
             try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
                 if (line.GetName()==l.GetName()){
 
-                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
-                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
-                    }
-                    if (bothDirections){
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
-                    }
+                        foreach (Station station in line.GetAllStations())
+                        {
+
+                            if (line.GetStation().CheckKeyExists(stationFrom && line.GetName().FindItem(stationTo)))
+                            {
+                                line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
+                            }
+                            if (bothDirections)
+                            {
+                                line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
+                            }
+                        }
 
                 }
                }
 
             }catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.message);
+                    Console.WriteLine("An error occured:",ex.Message);
             }
 
 
@@ -118,7 +140,7 @@ namespace TFLAppHandcoded{
         //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
         public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, double time,bool bothDirections){
               try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -144,10 +166,11 @@ namespace TFLAppHandcoded{
 
 
         //Removed time and bothdirection attribute 
-        public CloseTrack(string stationFrom,string stationTo){
+        public void CloseTrack(ILine l, string stationFrom,string stationTo, bool bothDirections = false)
+        {
 
              try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -170,9 +193,10 @@ namespace TFLAppHandcoded{
 
 
 
-        public void OpenTrack(line: ILine, stationFrom: string, stationTo: string){
+        public void OpenTrack(ILine l, string stationFrom, string stationTo)
+        {
               try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -194,10 +218,18 @@ namespace TFLAppHandcoded{
         }
 
 
-        public WeightedLinkedList<IStation, double>? FindShortestPath(IStation startStation, IStation destinationStation)
+        public WeightedLinkedList<IStation, double>? FindShortestPath(string startStation, string destinationStation)
 		{
-            return FastestPathAlgorithm.GetFastestPath(startStation, destinationStation, changeLineTime);
+            IStation start = this.GetStation(startStation);
+            IStation destination = this.GetStation(destinationStation);
+            return FastestPathAlgorithm.GetFastestPath(start, destination, changeLineTime);
 		}
+
+        // Delete it if not used
+        IStation[] GetAllStation(ILine line)
+        {
+            return null;
+        }
 
     }
 }
