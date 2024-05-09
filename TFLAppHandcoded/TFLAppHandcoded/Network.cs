@@ -52,10 +52,10 @@ namespace TFLAppHandcoded{
         }
 
 
-        public string GetStation(string name){
+        public string GetStation(string linename){
             try{
                 foreach(Line line in lines){
-                    if(line.GetStation().GetName()==name){
+                    if(line.GetStation().GetName()==linename){
                         return line.GetStation();
                 }
 
@@ -67,12 +67,12 @@ namespace TFLAppHandcoded{
             
             }
 
-
-        public IStation GetAllStation(ILine line){
+        
+        public IStation GetAllStation(string linename){
 
             try{
                 foreach (Line line in lines){
-                if(this.line.GetName()==line.GetName()){
+                if(this.line.GetName()==linename){
                     return line.GetAllStations();
                 }
                 
@@ -140,7 +140,9 @@ namespace TFLAppHandcoded{
 
         }
 
-        public CloseTrack(string stationFrom,string stationTo,double time, bool bothDirections){
+
+        //Removed time and bothdirection attribute 
+        public CloseTrack(string stationFrom,string stationTo){
 
              try{
                foreach(Iline line in lines){
@@ -151,10 +153,9 @@ namespace TFLAppHandcoded{
 
                     if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
                         line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(false);
-                    }
-                    if (bothDirections){
                         line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(false);
                     }
+                    
 
                 }
                }
@@ -177,10 +178,9 @@ namespace TFLAppHandcoded{
 
                     if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
                         line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(true);
-                    }
-                    if (bothDirections){
                         line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(true);
                     }
+                    
 
                 }
                }
