@@ -108,51 +108,35 @@ namespace TFLAppHandcoded{
 
          
             try{
-               foreach(ILine line in lines){
+               foreach(Iline line in lines){
 
-                
+                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
                 if (line.GetName()==l.GetName()){
 
-                        foreach (Station station in line.GetAllStations())
-                        {
-                            if (station.Equals( stationFrom)){
-                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
-                            
-                            Station stationToAddDelayFrom = new Station(stationTo);
+                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
+                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
+                    }
+                    if (bothDirections){
+                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
+                    }
 
-                            WeightedListNode<Station,Track>? stationToAddDelay =connectedFrom.FindNodeWeight(stationToAddDelayFrom);
-
-                            if(stationToAddDelay){
-                            Track trackFrom = stationToAddDelayFrom.GetWeight();
-                            trackFrom.SetDelay(time);
-                            }
-                            if (bothDirections){
-                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
-                                Station stationToAddDelayTo = new Station(stationFrom);
-                                WeightedListNode<Station,Track>? stationToAddDelay2 =connectedTo.FindNodeWeight(stationToAddDelayTo);
-
-                                if(stationToAddDelay2){
-                                Track trackTo = stationToAddDelayTo.GetWeight();
-                                trackTo.SetDelay(time);
-                                }}
-                            
-                            }
-                            
-                            
-            }}
+                }
                }
 
             }catch(Exception ex){
-                    Console.WriteLine("An error occured:",Ex.Message);
+                    Console.WriteLine("An error occured:",ex.message);
             }
         }
 
         //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
         public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, bool bothDirections){
               try{
-                
-                foreach(ILine line in lines){
-                    if (line.GetName()==l.GetName()){
+               foreach(Iline line in lines){
+
+                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
+                if (line.GetName()==l.GetName()){
 
                         foreach (Station station in line.GetAllStations())
                         {

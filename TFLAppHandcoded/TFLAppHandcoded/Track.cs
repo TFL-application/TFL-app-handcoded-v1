@@ -29,7 +29,7 @@ public class Track{
             this.time=time;
             }
 
-        public GetIsOpen(     public bool ){
+        public bool GetIsOpen( ){
             return isOpen;
             }
 

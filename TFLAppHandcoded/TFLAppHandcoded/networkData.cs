@@ -13,7 +13,7 @@ namespace TFLAppHandcoded
 
 		public void AddLine(Line line)
 			{
-			Lines.Add(line.Name, line);
+			Lines.Add(line.GetName(), line);
 			}
 	}
 }
