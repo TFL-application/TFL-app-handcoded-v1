@@ -1,13 +1,12 @@
 ﻿using System;
-using static System.Collections.Specialized.BitVector32;
 
-namespace TFL_Journey_CW
+namespace TFLAppHandcoded
 {
 	public class Line
 	{
 		private string name;
         private string color;
-        private Dictionary<Station,LinkedList<Station,Track>>;
+        private Dictionary<Station,LinkedList<Station,Track>> stations;
 
 		public Line(string name, string color, Station[] stations)
 

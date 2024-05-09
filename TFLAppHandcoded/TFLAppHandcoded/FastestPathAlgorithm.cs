@@ -21,6 +21,12 @@ namespace TFLAppHandcoded
             }
         }
 
+        // A public method that uses the private class used for unit test
+        //public static AlgorithmNode AddAlgorithmNode(IStation node, double cost, WeightedLinkedList<IStation, double>? nodePath)
+        //{
+        //    return new AlgorithmNode(node, cost, nodePath);
+        //}
+
         // Main method
         public static WeightedLinkedList<IStation, double>? GetFastestPath(IStation start, IStation destination, double changeLineTime)
         {

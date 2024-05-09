@@ -9,7 +9,7 @@ namespace TFLAppHandcoded{
         public Dictionary<string, Line> Lines { get; private set; }
     }
 
-    public class Network:INetwork{
+    public class Network: INetwork{
 
         private double changeLineTime = 2.0;
 

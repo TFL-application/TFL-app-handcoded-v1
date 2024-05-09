@@ -1,19 +1,8 @@
 ﻿using System;
-namespace Station
-{
- 
-    // Interface defining the behavior of a station
-    public interface IStation
-    {
-        IStation[] GetConnections();
-        string GetName();
-        void SetName(string name);
-        ILine GetLine();
-        void SetLine(ILine line);
-        void AddChange(IStation toStation);
-        void AddChanges(IStation[] stations);
-    }
+using TFLAppHandcoded.Interfaces;
 
+namespace TFLAppHandcoded
+{
 
     // Concrete implementation of a station
     public class Station : IStation
