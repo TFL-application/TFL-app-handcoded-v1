@@ -193,11 +193,8 @@ namespace TFLAppHandcoded{
         //Removed time and bothdirection attribute 
         public void CloseTrack(ILine l, string stationFrom,string stationTo, bool bothDirections = false)
         {
-
-             try{
+        try{
                foreach(ILine line in lines){
-
-                
                 if (line.GetName()==l.GetName()){
 
                         foreach (Station station in line.GetAllStations())
@@ -210,7 +207,7 @@ namespace TFLAppHandcoded{
                             WeightedListNode<Station,Track>? stationToCloseTrack =connectedFrom.FindNodeWeight(stationToCloseTrackFrom);
 
                             if(stationToCloseTrack ){
-                            Track trackFrom = stationToCloseTrackFrom.GetWeight();
+                            Track trackFrom = stationToCloseTrackFrom.SetIsOpen(false);
                             
                             }
                             if (bothDirections){
@@ -218,8 +215,8 @@ namespace TFLAppHandcoded{
                                 Station stationToCloseTrackTo = new Station(stationFrom);
                                 WeightedListNode<Station,Track>? stationToCloseTrack2 =connectedTo.FindNodeWeight(stationToCloseTrackTo);
 
-                                if(stationToAddDelay2){
-                                Track trackTo = stationToAddDelayTo.GetWeight();
+                                if(stationToCloseTrack2 ){
+                                Track trackTo = stationToCloseTrack2 .SetIsOpen(false);
                                 
                                 }}
                             
@@ -236,21 +233,41 @@ namespace TFLAppHandcoded{
 
         public void OpenTrack(ILine l, string stationFrom, string stationTo)
         {
-              try{
+              try
                foreach(ILine line in lines){
-
-                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
-                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
                 if (line.GetName()==l.GetName()){
 
-                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
-                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(true);
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(true);
-                    }
-                    }
-               }
+                        foreach (Station station in line.GetAllStations())
+                        {
+                            if (station.Equals( stationFrom)){
+                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
+                            
+                            Station stationToOpenTrackFrom = new Station(stationTo);
 
-            }catch(Exception ex){
+                            WeightedListNode<Station,Track>? stationToOpenTrack =connectedFrom.FindNodeWeight(stationToOpenTrackFrom);
+
+                            if(stationToOpenTrack ){
+                            Track trackFrom = stationToOpenTrackFrom.SetIsOpen(true);
+                            
+                            }
+                            if (bothDirections){
+                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
+                                Station stationToOpenTrackTo = new Station(stationFrom);
+                                WeightedListNode<Station,Track>? stationToOpenTrack2 =connectedTo.FindNodeWeight(stationToOpenTrackTo);
+
+                                if(stationToOpenTrack2){
+                                Track trackTo = stationToOpenTrack2.SetIsOpen(true);
+                                
+                                }}
+                            
+                            }
+                            }}}}
+              
+              
+              
+              
+              
+              catch(Exception ex){
                     Console.WriteLine("An error occured:",ex.message);
             }
 
