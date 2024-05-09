@@ -5,7 +5,7 @@ namespace TFLAppHandcoded
 {
 
     // Concrete implementation of a station
-    public class Station : IStation
+    public class Station : IStation,IEquatable<Station>
     {
         private string name;
         private ILine line;
@@ -63,6 +63,14 @@ namespace TFLAppHandcoded
             changes.CopyTo(newChanges, 0); // Copy existing connections to the new array.
             Array.Copy(stations, 0, newChanges, currentLength, additionalLength); // Copy new stations into the new array starting at the index of the current length.
             changes = newChanges; // Update the changes array to the new array with all connections.
+        }
+
+      public bool Equals(Station stationName)
+        {
+            if (stationName == null)
+                return false;
+            
+            return name == stationName.name;
         }
 
 

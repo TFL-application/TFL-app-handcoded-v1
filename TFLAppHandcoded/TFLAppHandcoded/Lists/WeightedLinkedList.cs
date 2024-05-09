@@ -37,6 +37,23 @@ namespace TFLAppHandcoded
             return null;
         }
 
+      
+        public W? FindNodeWeight(O item)
+        {
+            if (!IsEmpty())
+            {
+                WeightedListNode<O, W>? current = this.head;
+
+                while (current != null && !item.Equals(current.GetItem()))
+                    current = current.GetNext();
+
+                if (current != null)
+                    return current.GetWeight();
+            }
+            Console.WriteLine($"Item with value  {item} not found")
+            return W;
+        }
+
         public void InsertAtHead(O item, W weight)
         {
             WeightedListNode<O, W> newItem = new WeightedListNode<O, W>(item, weight, this.head);
