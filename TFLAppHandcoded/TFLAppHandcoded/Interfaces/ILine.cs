@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Xml.Linq;
-using static System.Collections.Specialized.BitVector32;
 
 namespace TFLAppHandcoded.Interfaces
 {

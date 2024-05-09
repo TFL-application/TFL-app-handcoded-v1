@@ -1,5 +1,6 @@
 ﻿using System;
 using TFLAppHandcoded.Interfaces;
+using TFLAppHandcoded.Dictionary;
 
 namespace TFLAppHandcoded{
 
@@ -10,6 +11,7 @@ namespace TFLAppHandcoded{
 
     public class Network:INetwork{
 
+        private double changeLineTime = 2.0;
 
         private NetworkData networkData;
         private Line[]lines;
@@ -192,8 +194,10 @@ namespace TFLAppHandcoded{
         }
 
 
-
-        public WeightedLinkedList<Station, double> FindShortestPath(Station start, Station destination){}
+        public WeightedLinkedList<IStation, double>? FindShortestPath(IStation startStation, IStation destinationStation)
+		{
+            return FastestPathAlgorithm.GetFastestPath(startStation, destinationStation, changeLineTime);
+		}
 
     }
 }

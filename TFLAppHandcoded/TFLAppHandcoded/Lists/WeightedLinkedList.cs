@@ -4,8 +4,8 @@ namespace TFLAppHandcoded
 {
     public class WeightedLinkedList<O, W>
     {
-        protected WeightedListNode<O, W>? head;   // points to the head of the list
-        protected int length;      // number of nodes in the list
+        public WeightedListNode<O, W>? head;   // points to the head of the list
+        public int length;      // number of nodes in the list
 
         public WeightedLinkedList()
         {
@@ -13,7 +13,14 @@ namespace TFLAppHandcoded
             this.length = 0;
         }
 
+        public WeightedLinkedList(O firstItem, W itemWeight)
+        {
+            this.head = new WeightedListNode<O, W>(firstItem, itemWeight);
+            this.length = 1;
+        }
+
         public bool IsEmpty() { return this.length == 0; }
+        public int GetLength() { return this.length; }
         public WeightedListNode<O, W>? GetHead() { return this.head; }
 
         private WeightedListNode<O, W>? FindItem(O item)
@@ -77,6 +84,25 @@ namespace TFLAppHandcoded
             this.head = this.head.GetNext();
             this.length--;
             return deletedItem;
+        }
+
+        public void ReverseList()
+        {
+            if (this.length > 1)
+            {
+                WeightedListNode<O, W> currentNode = this.head;
+                WeightedListNode<O, W> nextNode = currentNode.GetNext();
+
+                currentNode.SetNext(null);
+
+                while (nextNode != null)
+                {
+                    currentNode = nextNode;
+                    nextNode = nextNode.GetNext();
+                    nextNode.SetNext(this.head);
+                    this.head = currentNode;
+                }
+            }
         }
     } 
 }
