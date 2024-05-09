@@ -106,9 +106,33 @@ namespace TFLAppHandcoded{
         //I have added Line attirbute:
         public void AddTimeDelay(ILine l, string stationFrom,string stationTo, double time, bool bothDirections){
 
-            // FindRecordValueWithKey
+         
             try{
-               foreach(ILine line in lines){
+               foreach(Iline line in lines){
+
+                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
+                if (line.GetName()==l.GetName()){
+
+                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
+                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
+                    }
+                    if (bothDirections){
+                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
+                    }
+
+                }
+               }
+
+            }catch(Exception ex){
+                    Console.WriteLine("An error occured:",ex.message);
+            }
+        }
+
+        //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
+        public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, bool bothDirections){
+              try{
+               foreach(Iline line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -116,53 +140,38 @@ namespace TFLAppHandcoded{
 
                         foreach (Station station in line.GetAllStations())
                         {
+                            if (station.Equals( stationFrom)){
+                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
+                            
+                            Station stationToRemoveDelayFrom = new Station(stationTo);
 
-                            if (line.GetStation().CheckKeyExists(stationFrom && line.GetName().FindItem(stationTo)))
-                            {
-                                line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
+                            WeightedListNode<Station,Track>? stationToRemoveDelay =connectedFrom.FindNodeWeight(stationToRemoveDelayFrom);
+
+                            if(stationToRemoveDelay){
+                            Track trackFrom = stationToRemoveDelayFrom.GetWeight();
+                            trackFrom.SetDelay(0.0);
                             }
-                            if (bothDirections)
-                            {
-                                line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
+                            if (bothDirections){
+                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
+
+                                Station stationToRemoveDelayTo = new Station(stationFrom);
+
+                                WeightedListNode<Station,Track>? stationToRemoveDelay2 =connectedTo.FindNodeWeight(stationToRemoveDelayTo);
+
+                                if(stationToremoveDelay2){
+                                Track trackTo = stationToremoveDelayTo.GetWeight();
+                                trackTo.SetDelay(0.0);
+                                }
+                                
                             }
-                        }
-
-                }
-               }
-
-            }catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.Message);
-            }
-
-
-        }
-
-        //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
-        public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, double time,bool bothDirections){
-              try{
-               foreach(ILine line in lines){
-
-                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
-                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
-                if (line.GetName()==l.GetName()){
-
-                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
-
-                        //for removing time delay The previously set delay is set back to 0.0
-                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(0.0);
-                    }
-                    if (bothDirections){
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(0.0);
-                    }
-
-                }
-               }
-
+                            }
+                            }
+                            }
+                
+    
             }catch(Exception ex){
                     Console.WriteLine("An error occured:",ex.message);
-            }
-
-        }
+            }}}
 
 
         //Removed time and bothdirection attribute 
@@ -170,23 +179,40 @@ namespace TFLAppHandcoded{
         {
 
              try{
-               foreach(ILine line in lines){
+               foreach(Iline line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
                 if (line.GetName()==l.GetName()){
 
-                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
-                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(false);
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(false);
-                    }
-                    
+                        foreach (Station station in line.GetAllStations())
+                        {
+                            if (station.Equals( stationFrom)){
+                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
+                            
+                            Station stationToCloseTrackFrom = new Station(stationTo);
 
-                }
-               }
+                            WeightedListNode<Station,Track>? stationToCloseTrack =connectedFrom.FindNodeWeight(stationToCloseTrackFrom);
 
-            }catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.message);
+                            if(stationToCloseTrack ){
+                            Track trackFrom = stationToCloseTrackFrom.GetWeight();
+                            
+                            }
+                            if (bothDirections){
+                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
+                                Station stationToCloseTrackTo = new Station(stationFrom);
+                                WeightedListNode<Station,Track>? stationToCloseTrack2 =connectedTo.FindNodeWeight(stationToCloseTrackTo);
+
+                                if(stationToAddDelay2){
+                                Track trackTo = stationToAddDelayTo.GetWeight();
+                                
+                                }}
+                            
+                            }
+                            }}}}
+             
+             catch(Exception ex){
+                    Console.WriteLine("An error occured:",Ex.message);
             }
         }
 
@@ -206,9 +232,7 @@ namespace TFLAppHandcoded{
                         line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetIsOpen(true);
                         line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetIsOpen(true);
                     }
-                    
-
-                }
+                    }
                }
 
             }catch(Exception ex){
