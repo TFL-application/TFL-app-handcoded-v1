@@ -10,7 +10,7 @@ namespace TFLAppHandcoded.Interfaces
         IStation GetStation(string name);
         IStation[] GetAllStation(ILine line);
         void AddTimeDelay(string stationFrom, string stationTo, double time, bool bothDirections);
-        void DeleteTimeDelay(ITrack track);
+        void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, bool bothDirections);
         void CloseTrack(string stationFrom, string stationTo, double time, bool bothDirections);
         void OpenTrack(ITrack track);
         WeightedLinkedList<IStation, double> FindShortestPath(IStation start, IStation destination);

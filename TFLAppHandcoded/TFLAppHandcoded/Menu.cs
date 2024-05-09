@@ -6,6 +6,7 @@ namespace TFLAppHandcoded{
     public class Menu{
 
         private INetwork network;
+        public 
           public void Display_menu()
 		{
 			
