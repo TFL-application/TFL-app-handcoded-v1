@@ -1,4 +1,8 @@
 ﻿<Properties StartupConfiguration="{8253305B-2D25-449C-80DC-8453C2FC8256}|Default">
+  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded.tests FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Program.cs">
     <Files>
       <File FileName="TFLAppHandcoded/Program.cs" Line="9" Column="2" />
@@ -15,11 +19,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

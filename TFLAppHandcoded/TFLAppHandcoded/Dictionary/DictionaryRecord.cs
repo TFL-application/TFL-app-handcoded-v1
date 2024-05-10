@@ -18,11 +18,6 @@ namespace TFLAppHandcoded.Dictionary
 				return true;
 			return false;
 		}
-
-		//public K GetKey() { return key; }
-		//public void SetKey(K key) { this.key = key; }
-  //      public V GetValue() { return value; }
-  //      public void SetValue(V value) { this.value = value; }
     }
 }
 

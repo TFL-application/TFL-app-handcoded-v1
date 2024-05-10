@@ -14,6 +14,7 @@
 
 		}
 
+
 		public void AddLine(Line line)
 		{
 			if (line == null)
@@ -69,6 +70,13 @@
 			DelayedTracks.Remove(track);
 		}
     }
+
+		public void AddLine(Line line)
+			{
+			Lines.Add(line.GetName(), line);
+			}
+	}
+
 }
 
 
