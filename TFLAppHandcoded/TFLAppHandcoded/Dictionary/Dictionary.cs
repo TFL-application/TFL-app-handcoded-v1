@@ -98,6 +98,16 @@ namespace TFLAppHandcoded.Dictionary
 
             return false;
         }
+
+        public void PrintDict()
+        {
+            for (int i = 1; i <= dictionary.Length; i++)
+            {
+                Console.WriteLine($"{i}. " +
+                    $"{dictionary[i - 1].key.ToString()} : " +
+                    $"{dictionary[i - 1].value.ToString()}");
+            }
+        } 
     }
 }
 
