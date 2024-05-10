@@ -1,6 +1,9 @@
+
+using TFLAppHandcoded.Interfaces;
+
 namespace TFLAppHandcoded{
 
-public class Track{
+public class Track : ITrack{
         private double time;
         private bool isOpen;
         private double delay;
@@ -8,6 +11,7 @@ public class Track{
         public Track( double time){
 
             this.time=time;
+            isOpen = true;
         }
 
 
