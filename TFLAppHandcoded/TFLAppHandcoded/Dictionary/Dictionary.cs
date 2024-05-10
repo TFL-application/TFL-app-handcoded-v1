@@ -21,13 +21,15 @@ namespace TFLAppHandcoded.Dictionary
             return keys;
         }
 
-        //public bool CheckKeyExists(Object key)
-        //{
-        //    foreach (DictionaryRecord<K, V> record in dictionary)
-        //        if (record.Equals(key))
-        //            return true;
-        //    return false;
-        //}
+        public bool CheckKeyExists(Object key)
+        {
+            foreach (DictionaryRecord<K, V> record in dictionary)
+                if (record.Equals(key))
+                {
+                    return true;
+                }
+                    return false;   
+        }
 
         public bool AddRecord(K key, V value)
 		{
