@@ -23,7 +23,7 @@ namespace TFLAppHandcoded
         public int GetLength() { return this.length; }
         public WeightedListNode<O, W>? GetHead() { return this.head; }
 
-        private WeightedListNode<O, W>? FindItem(O item)
+        public WeightedListNode<O, W>? FindItem(O item)
         {
             if (!IsEmpty())
             {
@@ -50,7 +50,7 @@ namespace TFLAppHandcoded
                 if (current != null)
                     return current.GetWeight();
             }
-            Console.WriteLine($"Item with value  {item} not found")
+            Console.WriteLine($"Item with value  {item} not found");
             return W;
         }
 
