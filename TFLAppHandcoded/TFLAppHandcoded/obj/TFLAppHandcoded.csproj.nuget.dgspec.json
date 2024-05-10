@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Applications/software engineer masters/Advanced Software Design/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj": {}
+    "/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj": {}
   },
   "projects": {
-    "/Applications/software engineer masters/Advanced Software Design/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj": {
+    "/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Applications/software engineer masters/Advanced Software Design/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj",
+        "projectUniqueName": "/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj",
         "projectName": "TFLAppHandcoded",
-        "projectPath": "/Applications/software engineer masters/Advanced Software Design/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj",
-        "packagesPath": "/Users/zara/.nuget/packages/",
-        "outputPath": "/Applications/software engineer masters/Advanced Software Design/TFL-app-handcoded-v1/TFLAppHandcoded/TFLAppHandcoded/obj/",
+        "projectPath": "/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/TFLAppHandcoded.csproj",
+        "packagesPath": "/Users/galinaabdurashitova/.nuget/packages/",
+        "outputPath": "/Users/galinaabdurashitova/Desktop/Projects/VisualStudioProjects/TFL-app-handcoded/TFLAppHandcoded/TFLAppHandcoded/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/zara/.nuget/NuGet/NuGet.Config"
+          "/Users/galinaabdurashitova/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.315/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
         }
       }
     }

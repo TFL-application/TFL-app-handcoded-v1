@@ -17,6 +17,12 @@ namespace TFLAppHandcoded
             this.name = name;
             this.changes = changes;
         }
+        
+        public Station(string name)
+        {
+            this.name = name;
+            this.changes = new IStation[0];
+        }
 
         public IStation[] GetConnections()
         {
