@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
+using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
 
 namespace TFLAppHandcoded
 {
-	public class Line
+	public class Line : ILine
 	{
 		private string name;
         private string color;
-        private Dict<Station,WeightedLinkedList<Station,Track>> stations;
+        private Dict<IStation,WeightedLinkedList<IStation,ITrack>> stations;
 
         public Line(string name, string color )
 
         {
 			this.name = name;
 			this.color = color;
-            stations = new Dict<Station, WeightedLinkedList<Station, Track>>();
+            stations = new Dict<IStation, WeightedLinkedList<IStation, ITrack>>();
 
         }
 
-        public void AddStation(Station station, WeightedLinkedList<Station, Track> connections)
+        public void AddStation(IStation station, WeightedLinkedList<IStation, ITrack> connections)
 		{
 			stations.AddRecord(station, connections);
 		}
@@ -44,11 +44,11 @@ namespace TFLAppHandcoded
             this.color = color;
         }
 
-        public Station GetStation(string name)
+        public IStation GetStation(string name)
 		{
-			Station[] allStations = GetAllStations();
+			IStation[] allStations = GetAllStations();
 
-			foreach (Station station in allStations)
+			foreach (IStation station in allStations)
 			{
 				if (station.GetName() == name) 
 				{
@@ -59,21 +59,21 @@ namespace TFLAppHandcoded
 			return null;
 		}
 
-		public Station[] GetAllStations()
+		public IStation[] GetAllStations()
 		{
-			Station[] stationKeys = stations.GetRecordKeys();
+			IStation[] stationKeys = stations.GetRecordKeys();
 
 			return stationKeys;
 
         }
 
-		public Track GetDistance(Station start, Station destination)
+		public ITrack GetDistance(IStation start, IStation destination)
 		{
 			// checks if start station exists
 			if (stations.CheckKeyExists(start))
 			{
                 // gives us the all the connections associated station start
-                WeightedLinkedList<Station, Track> connectedStations = stations.FindRecordValueWithKey(start);
+                WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(start);
 
                 // finding the weight associated with destination station
                 Track stationNode = connectedStations.FindNodeWeight(destination);
@@ -86,11 +86,11 @@ namespace TFLAppHandcoded
             
         }
 
-		public WeightedLinkedList<Station, Track> GetConnectedStations(Station station)
+		public WeightedLinkedList<IStation, ITrack> GetConnectedStations(IStation station)
 		{
 			if (stations.CheckKeyExists(station))
 			{
-                WeightedLinkedList<Station, Track> connectedStations = stations.FindRecordValueWithKey(station);
+                WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(station);
 
                 return connectedStations;
             }
@@ -99,25 +99,25 @@ namespace TFLAppHandcoded
 
         }
 			
-		public Dict<Station, LinkedList<Station>> GetDelayedTracks()
+		public Dict<IStation, LinkedList<IStation>> GetDelayedTracks()
 		{
 			// create empty dictionary
-            Dict<Station, LinkedList<Station>> delayedTracks = new Dict<Station, LinkedList<Station>>();
+            Dict<IStation, LinkedList<IStation>> delayedTracks = new Dict<IStation, LinkedList<IStation>>();
 
 			// loop through station in dictionary
-			foreach (Station station in stations.GetRecordKeys())
+			foreach (IStation station in stations.GetRecordKeys())
 			{
 
-				WeightedLinkedList<Station, Track> connectedStations = stations.FindRecordValueWithKey(station);
+				WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(station);
 
 				//creating empty list for delayed tracks 
-                LinkedList < Station > delayedStations = new LinkedList<Station>();
+                LinkedList < IStation > delayedStations = new LinkedList<IStation>();
 
                 ////loop through each node in weighted linked list
-                WeightedListNode<Station, Track> currentNode = connectedStations.GetHead();
+                WeightedListNode<IStation, ITrack> currentNode = connectedStations.GetHead();
 				while(currentNode !=null)
 				{
-                    Track track = currentNode.GetWeight();
+                    ITrack track = currentNode.GetWeight();
 
 					if(track.GetDelay() > 0) // check if there is a delay
                     {
@@ -137,26 +137,26 @@ namespace TFLAppHandcoded
 
         }
 
-		public Dict<Station, LinkedList<Station>> GetClosedTracks()
+		public Dict<IStation, LinkedList<IStation>> GetClosedTracks()
 		{
 			// create empty dictionaru for closed tracks 
-            Dict<Station, LinkedList<Station>> closedTracks = new Dict<Station, LinkedList<Station>>();
+            Dict<IStation, LinkedList<IStation>> closedTracks = new Dict<IStation, LinkedList<IStation>>();
 
             // loop through station in dictionary
-            foreach (Station station in stations.GetRecordKeys())
+            foreach (IStation station in stations.GetRecordKeys())
             {
 				//get connected stations for the station
-                WeightedLinkedList<Station, Track> connectedStations = stations.FindRecordValueWithKey(station);
+                WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(station);
 
                 //creating empty list for closed stations
-                LinkedList<Station> closedStations = new LinkedList<Station>();
+                LinkedList<IStation> closedStations = new LinkedList<IStation>();
 
 				//loop through each node in weighted linked list
-                WeightedListNode<Station, Track> currentNode = connectedStations.GetHead();
+                WeightedListNode<IStation, ITrack> currentNode = connectedStations.GetHead();
 				
                 while (currentNode != null)
                 {
-                    Track track = currentNode.GetWeight();
+                    ITrack track = currentNode.GetWeight();
 
                     if (track.GetIsOpen() == false) // check if track is closed 
                     {
