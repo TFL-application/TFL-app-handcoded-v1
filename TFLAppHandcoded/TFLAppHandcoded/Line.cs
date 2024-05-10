@@ -39,7 +39,7 @@ namespace TFLAppHandcoded
 			return color;
 		}
 
-        public void SetColour(string color)
+        public void SetColor(string color)
         {
             this.color = color;
         }
@@ -76,7 +76,7 @@ namespace TFLAppHandcoded
                 WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(start);
 
                 // finding the weight associated with destination station
-                Track stationNode = connectedStations.FindNodeWeight(destination);
+                ITrack stationNode = connectedStations.FindNodeWeight(destination);
 
                 return stationNode;
             }
