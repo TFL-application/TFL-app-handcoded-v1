@@ -20,9 +20,7 @@ namespace TFLAppHandcoded{
         private double changeLineTime = 2.0;
 
         private NetworkData networkData;
-        private Line[]lines;
-        private LinkedList<Track> closedTracks;
-        private LinkedList<Track> delayedTracks;
+        private Line[] lines;
 
         public Network(NetworkData networkData)
         {
@@ -267,12 +265,6 @@ namespace TFLAppHandcoded{
             IStation destination = this.GetStation(destinationStation);
             return FastestPathAlgorithm.GetFastestPath(start, destination, changeLineTime);
 		}
-
-        // Delete it if not used
-        IStation[] GetAllStation(ILine line)
-        {
-            return null;
-        }
 
     }
 }

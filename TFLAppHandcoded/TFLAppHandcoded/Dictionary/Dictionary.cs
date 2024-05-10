@@ -21,7 +21,7 @@ namespace TFLAppHandcoded.Dictionary
             return keys;
         }
 
-        public bool CheckKeyExists(Object key)
+        public bool CheckKeyExists(K key)
         {
             foreach (DictionaryRecord<K, V> record in dictionary)
                 if (record.Equals(key))

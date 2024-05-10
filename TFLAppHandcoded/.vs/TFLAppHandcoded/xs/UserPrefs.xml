@@ -1,13 +1,12 @@
 ﻿<Properties StartupConfiguration="{8253305B-2D25-449C-80DC-8453C2FC8256}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Line.cs">
     <Files>
       <File FileName="TFLAppHandcoded/Program.cs" Line="9" Column="1" />
-      <File FileName="TFLAppHandcoded/Line.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Line.cs" Line="38" Column="4" />
+      <File FileName="TFLAppHandcoded/Station.cs" Line="24" Column="42" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,6 +20,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
