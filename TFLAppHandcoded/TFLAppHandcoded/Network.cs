@@ -1,7 +1,6 @@
 ﻿using System;
 using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
-using System.Xml.Linq;
 
 namespace TFLAppHandcoded{
 
@@ -10,27 +9,15 @@ namespace TFLAppHandcoded{
 
         private double changeLineTime = 2.0;
 
-        private NetworkData networkData;
-        private Line[]lines;
+        private Line[] lines;
         private LinkedList<Track> closedTracks;
         private LinkedList<Track> delayedTracks;
 
         public Network()
         {
-            NetworkInitializer initializer = new NetworkInitializer();
-            networkData = initializer.InitializeNwtwork();
+            NetworkData data = new NetworkData();
+            lines = data.lines;
         }
-
-
-        
-
-        private void InitilizeNetwork(NetworkData networkData)
-        {
-            var circleBakerStreet = new Station("Baker Street", null);
-        }
-
-
-        public Network(){}
 
 
         //return type void is added because it might be required for the menu to display line
