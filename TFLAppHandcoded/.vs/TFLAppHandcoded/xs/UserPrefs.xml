@@ -2,18 +2,36 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Line.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded.tests/AlgorithmTests.cs">
     <Files>
-      <File FileName="TFLAppHandcoded/Program.cs" Line="9" Column="1" />
-      <File FileName="TFLAppHandcoded/Line.cs" Line="38" Column="4" />
-      <File FileName="TFLAppHandcoded/Station.cs" Line="24" Column="42" />
+      <File FileName="TFLAppHandcoded/Network.cs" Line="292" Column="1" />
+      <File FileName="TFLAppHandcoded/networkData.cs" Line="83" Column="1" />
+      <File FileName="TFLAppHandcoded/NetworkInitializer.cs" Line="250" Column="1" />
+      <File FileName="TFLAppHandcoded/Program.cs" Line="14" Column="53" />
+      <File FileName="TFLAppHandcoded/Menu.cs" Line="17" Column="45" />
+      <File FileName="TFLAppHandcoded.tests/AlgorithmTests.cs" Line="159" Column="39" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
+          <Node name="TFLAppHandcoded" expanded="True">
+            <Node name="TFLAppHandcoded" expanded="True">
+              <Node name="Dictionary" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Lists" expanded="True" />
+            </Node>
+            <Node name="TFLAppHandcoded.tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
           <Node name="TFLAppHandcoded">
-            <Node name="TFLAppHandcoded">
-              <Node name="Line.cs" selected="True" />
+            <Node name="TFLAppHandcoded.tests" expanded="True">
+              <Node name="TFLAppHandcoded.tests" expanded="True">
+                <Node name="AlgorithmMethodsTests" expanded="True" />
+                <Node name="AlgorithmTests" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

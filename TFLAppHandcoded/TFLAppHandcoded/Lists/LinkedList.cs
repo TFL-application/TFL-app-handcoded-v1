@@ -16,18 +16,19 @@ namespace TFLAppHandcoded
         public int GetLength() { return this.length; }
         public ListNode<T>? GetHead() { return this.head; }
 
-        private ListNode<T>? FindItem(T item)
+        public ListNode<T>? FindItem(T item)
         {
             if (!this.IsEmpty())
             {
                 ListNode<T>? current = this.head;
 
-                while ((current != null) && (!(item.Equals(current.GetItem()))))
+                while (current != null)
                 {
+                    if (current.GetItem().Equals(item))
+                        return current;
+
                     current = current.GetNext();
                 }
-
-                return current;
             }
             return null;
         }
@@ -86,6 +87,16 @@ namespace TFLAppHandcoded
 
         public bool DeleteItem(T item)
         {
+            if (this.length == 0)
+                return false;
+
+            if (this.head.GetItem().Equals(item))
+            {
+                this.head = this.head.GetNext();
+                length--;
+                return true;
+            }
+
             ListNode<T> currentNode = this.head;
             ListNode<T> nextNode = currentNode.GetNext();
             while (nextNode != null)
@@ -93,8 +104,12 @@ namespace TFLAppHandcoded
                 if (nextNode.GetItem().Equals(item))
                 {
                     currentNode.SetNext(nextNode.GetNext());
+                    length--;
                     return true;
                 }
+
+                currentNode = nextNode;
+                nextNode = nextNode.GetNext();
             }
             return false;
         }

@@ -14,8 +14,8 @@ namespace TFLAppHandcoded.Interfaces
         IStation[] GetAllStations();
         ITrack GetDistance(IStation start, IStation destination);
         WeightedLinkedList<IStation, ITrack> GetConnectedStations(IStation station);
-        Dict<Station, LinkedList<Station>> GetDelayedTracks();
-        Dict<Station, LinkedList<Station>> GetClosedTracks();
+        Dict<IStation, LinkedList<IStation>> GetDelayedTracks();
+        Dict<IStation, LinkedList<IStation>> GetClosedTracks();
     }
 }
 
