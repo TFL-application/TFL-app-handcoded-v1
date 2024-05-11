@@ -1,43 +1,20 @@
 ﻿using System;
 using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
-using System.Xml.Linq;
 
 namespace TFLAppHandcoded{
 
-    public class NetworkData
-    {
-        public Dictionary<string, Line> lines { get; private set; }
-
-        public NetworkData()
-        {
-            lines = new Dictionary<string, Line>();
-        }
-    }
-
     public class Network: INetwork{
 
-        private double changeLineTime = 2.0;
 
-        private NetworkData networkData;
+        private double changeLineTime = 2.0;
         private Line[] lines;
 
         public Network()
         {
-            NetworkInitializer initializer = new NetworkInitializer();
-            networkData = initializer.InitializeNetwork();
+            NetworkData data = new NetworkData();
+            lines = data.lines;
         }
-
-
-        
-
-        private void InitilizeNetwork(NetworkData networkData)
-        {
-            var circleBakerStreet = new Station("Baker Street", null);
-        }
-
-
-        public Network(){}
 
 
         //return type void is added because it might be required for the menu to display line

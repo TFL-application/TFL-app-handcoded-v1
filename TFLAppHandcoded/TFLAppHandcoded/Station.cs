@@ -6,13 +6,14 @@ namespace TFLAppHandcoded
 
     // Concrete implementation of a station
     public class Station : IStation,IEquatable<Station>
+
     {
         private string name;
         private ILine line;
         private IStation[] changes;
 
         // Constructor to initialize the station
-        public Station(string name, IStation[] changes)
+        public Station(string name, IStation[] changes, NetworkData networkData = null)
         {
             this.name = name;
             this.changes = changes;

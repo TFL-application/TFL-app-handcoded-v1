@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
 
@@ -11,7 +11,6 @@ namespace TFLAppHandcoded
         private Dict<IStation,WeightedLinkedList<IStation,ITrack>> stations;
 
         public Line(string name, string color )
-
         {
 			this.name = name;
 			this.color = color;
