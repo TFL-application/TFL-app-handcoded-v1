@@ -109,17 +109,36 @@ namespace TFLAppHandcoded{
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
                 if (line.GetName()==l.GetName()){
 
-                    if(line.GetStation().CheckKeyExists(stationFrom&&line.GetName().FindItem(stationTo))){
-                        line.GetStation[stationFrom].FindRecordValueWithKey(stationTo).SetDelay(time);
-                    }
-                    if (bothDirections){
-                        line.GetStation[stationTo].FindRecordValueWithKey(stationFrom).SetDelay(time);
-                    }
+                        foreach (Station station in line.GetAllStations())
+                        {
+                            if (station.Equals( stationFrom)){
+                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
+                            
+                            Station stationToAddDelayFrom = new Station(stationTo);
 
-                }
-               }
+                            WeightedListNode<Station,Track>? stationToAddDelay =connectedFrom.FindNodeWeight(stationToAddDelayFrom);
 
-            }catch(Exception ex){
+                            if(stationToAddDelay){
+                            Track trackFrom = stationToAddDelayFrom.GetWeight();
+                            trackFrom.SetDelay(time);
+                            }
+                            if (bothDirections){
+                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
+
+                                Station stationToAddDelayTo = new Station(stationFrom);
+
+                                WeightedListNode<Station,Track>? stationToAddDelay2 =connectedTo.FindNodeWeight(stationToAddDelayTo);
+
+                                if(stationToAddDelay2){
+                                Track trackTo = stationToAddDelayTo.GetWeight();
+                                trackTo.SetDelay(time);
+                                }
+                                
+                            }
+                            }}}
+                
+    
+            }}catch(Exception ex){
                     Console.WriteLine("An error occured:",ex.message);
             }
         }
@@ -159,12 +178,10 @@ namespace TFLAppHandcoded{
                                 }
                                 
                             }
-                            }
-                            }
-                            }
+                            }}}
                 
     
-            }catch(Exception ex){
+            }}catch(Exception ex){
                     Console.WriteLine("An error occured:",ex.message);
             }}}
 
