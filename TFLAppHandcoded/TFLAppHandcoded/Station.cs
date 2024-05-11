@@ -6,6 +6,7 @@ namespace TFLAppHandcoded
 
     // Concrete implementation of a station
     public class Station : IStation,IEquatable<Station>
+
     {
         private string name;
         private ILine line;

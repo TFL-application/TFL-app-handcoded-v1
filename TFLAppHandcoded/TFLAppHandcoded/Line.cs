@@ -8,7 +8,7 @@ namespace TFLAppHandcoded
         private string color;
         private Dictionary<Station,WeightedLinkedList<Station,Track>> stations;
 
-		public Line(string name, string color)
+		public Line(string name, string color, Station[] victoriaLineStations)
 
         {
 			this.name = name;

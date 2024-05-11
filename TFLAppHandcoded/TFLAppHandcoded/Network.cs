@@ -18,7 +18,7 @@ namespace TFLAppHandcoded{
         public Network()
         {
             NetworkInitializer initializer = new NetworkInitializer();
-            networkData = initializer.InitializeNetwork();
+            networkData = initializer.InitializeNwtwork();
         }
 
 
