@@ -5,17 +5,8 @@ using System.Xml.Linq;
 
 namespace TFLAppHandcoded{
 
-    public class NetworkData
-    {
-        public Dictionary<string, Line> lines { get; private set; }
-
-        public NetworkData()
-        {
-            lines = new Dictionary<string, Line>();
-        }
-    }
-
     public class Network: INetwork{
+
 
         private double changeLineTime = 2.0;
 

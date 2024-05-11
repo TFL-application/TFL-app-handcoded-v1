@@ -2,25 +2,29 @@
 {
     public class NetworkInitializer
 	{
-        public networkData InitializeNetwork()
-        {
+        NetworkData networkData = new NetworkData();
+
+        
             //victoria line stations
-            Station walthamstowCentral = new Station("Walthamstow Central");
-            Station blackhorseRoad = new Station("Blackhorse Road");
-            Station tottenhamHale = new Station("Tottenham Hale");
-            Station sevenSisters = new Station("Seven Sisters");
-            Station finsburyPark = new Station("Finsbury Park");
-            Station VhighburyNIslington = new Station("Highbury & Islington");
-            Station VkingsCrossStPancras = new Station("King's Cross St Pancras");
-            Station euston = new Station("Euston");
-            Station warrenStreet = new Station("Warren Street");
-            Station oxfordCircus = new Station("Oxford Circus");
-            Station VgreenPark = new Station("Green Park");
-            Station Vvictoria = new Station("Victoria");
-            Station pimlico = new Station("Pimlico");
-            Station vauxhall = new Station("Vauxhall");
-            Station stockwell = new Station("Stockwell");
-            Station brixton = new Station("Brixton");
+            Station[] victoriaLineStations = new Station[]
+  {
+    new Station("Walthamstow Central"),
+    new Station("Blackhorse Road"),
+    new Station("Tottenham Hale"),
+    new Station("Seven Sisters"),
+    new Station("Finsbury Park"),
+    new Station("Highbury & Islington"),
+    new Station("King's Cross St Pancras"),
+    new Station("Euston"),
+    new Station("Warren Street"),
+    new Station("Oxford Circus"),
+    new Station("Green Park"),
+    new Station("Victoria"),
+    new Station("Pimlico"),
+    new Station("Vauxhall"),
+    new Station("Stockwell"),
+    new Station("Brixton"),
+  };
 
             //jubilee line stations
             Station stanmore = new Station("Stanmore");
@@ -234,15 +238,19 @@
                 Ostratford,
             });
 
-            networkData.AddLine(victoriaLine);
-            networkData.AddLine(jubileeLine);
-            networkData.AddLine(circleLine);
-            networkData.AddLine(overgroundLine);
+            NetworkData.AddLine(victoriaLine);
+            NetworkData.AddLine(jubileeLine);
+            NetworkData.AddLine(circleLine);
+            NetworkData.AddLine(overgroundLine);
 
 
 
-            return networkData;
+            return NetworkData;
+internal NetworkData? InitializeNetwork()
+        {
+            throw new NotImplementedException();
         }
+    }
         
     }
 }
