@@ -33,7 +33,10 @@ public class Track : ITrack{
             this.time=time;
             }
 
-        public bool GetIsOpen( ){
+
+        public GetIsOpen(public bool )
+            {
+
             return isOpen;
             }
 
@@ -51,6 +54,6 @@ public class Track : ITrack{
                     throw new ArgumentException("Time cannot be negative.");
                 }
             this.delay=delay;
-            }}
-
+            }
 }
+
