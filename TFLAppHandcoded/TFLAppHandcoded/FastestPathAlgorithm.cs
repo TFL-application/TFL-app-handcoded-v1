@@ -94,7 +94,7 @@ namespace TFLAppHandcoded
                         }
                     }
 
-                    // 18. Select the next station in connected stations
+                    // 17. Select the next station in connected stations
                     connectedVertexListNode = connectedVertexListNode.GetNext();
                 }
             }
@@ -129,7 +129,7 @@ namespace TFLAppHandcoded
         private static Dict<IStation, AlgorithmNode> AddNewNode(IStation node, double weight,
             AlgorithmNode previousNode, Dict<IStation, AlgorithmNode> nodeDict)
         {
-            // 15. Create path list for the connected station,
+            // 14. Create path list for the connected station,
             // starting with the connected node, and add the selected node path to it
             var connectedStationList = new WeightedLinkedList<IStation, double> (node, weight);
             var currentNode = previousNode.nodePath.GetHead();
@@ -141,11 +141,11 @@ namespace TFLAppHandcoded
             }
             connectedStationList.ReverseList();
 
-            // 16. Set connected station cost = track travel time
+            // 15. Set connected station cost = track travel time
             // + cost of the selected station
             var nodeInfo = new AlgorithmNode(node, previousNode.cost + weight, connectedStationList);
 
-            // 17. Put connected station to unknown stations
+            // 16. Put connected station to unknown stations
             nodeDict.AddRecord(node, nodeInfo);
 
             return nodeDict;
