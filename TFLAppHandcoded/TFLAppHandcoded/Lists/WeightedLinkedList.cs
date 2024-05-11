@@ -23,7 +23,7 @@ namespace TFLAppHandcoded
         public int GetLength() { return this.length; }
         public WeightedListNode<O, W>? GetHead() { return this.head; }
 
-        private WeightedListNode<O, W>? FindItem(O item)
+        public WeightedListNode<O, W>? FindItem(O item)
         {
             if (!IsEmpty())
             {
@@ -50,8 +50,8 @@ namespace TFLAppHandcoded
                 if (current != null)
                     return current.GetWeight();
             }
-            Console.WriteLine($"Item with value  {item} not found")
-            return W;
+            Console.WriteLine($"Item with value  {item} not found");
+            return default;
         }
 
         public void InsertAtHead(O item, W weight)
@@ -103,6 +103,19 @@ namespace TFLAppHandcoded
             return deletedItem;
         }
 
+        public void PrintList()
+        {
+            WeightedListNode<O, W> currentNode = this.head;
+            Console.WriteLine($"List Length: {this.length}");
+            for (int i = 1; i <= this.length; i++)
+            {
+                Console.WriteLine($"{i}. " +
+                    $"Object: {currentNode.GetItem().ToString()}, " +
+                    $"Weight: {currentNode.GetWeight().ToString()}");
+                currentNode = currentNode.GetNext();
+            }
+        }
+
         public void ReverseList()
         {
             if (this.length > 1)
@@ -116,10 +129,23 @@ namespace TFLAppHandcoded
                 {
                     currentNode = nextNode;
                     nextNode = nextNode.GetNext();
-                    nextNode.SetNext(this.head);
+                    currentNode.SetNext(this.head);
                     this.head = currentNode;
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            WeightedListNode<O, W> currentNode = this.head;
+            string s = $"Head: {currentNode.GetItem().ToString()} / {currentNode.GetWeight().ToString()}";
+            currentNode = currentNode.GetNext();
+            for (int i = 1; i < this.length; i++)
+            {
+                s = s + $" -> {currentNode.GetItem().ToString()} / {currentNode.GetWeight().ToString()}";
+                currentNode = currentNode.GetNext();
+            }
+            return s;
         }
     } 
 }

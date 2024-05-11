@@ -18,6 +18,12 @@ namespace TFLAppHandcoded
             this.name = name;
             this.changes = changes;
         }
+        
+        public Station(string name)
+        {
+            this.name = name;
+            this.changes = new IStation[0];
+        }
 
         public IStation[] GetConnections()
         {
@@ -70,12 +76,21 @@ namespace TFLAppHandcoded
         {
             if (stationName == null)
                 return false;
-            
-            return name == stationName.name;
+
+            if (line == null)
+                return name == stationName.name;
+            else
+                return name == stationName.name && line.Equals(stationName.line);
         }
 
 
-
+        public override string ToString()
+        {
+            if (line == null)
+                return $"{this.name}";
+            else
+                return $"{this.name} {this.line.GetName()}";
+        }
     }
 }
 

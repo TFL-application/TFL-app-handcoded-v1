@@ -21,13 +21,15 @@ namespace TFLAppHandcoded.Dictionary
             return keys;
         }
 
-        //public bool CheckKeyExists(Object key)
-        //{
-        //    foreach (DictionaryRecord<K, V> record in dictionary)
-        //        if (record.Equals(key))
-        //            return true;
-        //    return false;
-        //}
+        public bool CheckKeyExists(K key)
+        {
+            foreach (DictionaryRecord<K, V> record in dictionary)
+                if (record.Equals(key))
+                {
+                    return true;
+                }
+                    return false;   
+        }
 
         public bool AddRecord(K key, V value)
 		{
@@ -98,6 +100,16 @@ namespace TFLAppHandcoded.Dictionary
 
             return false;
         }
+
+        public void PrintDict()
+        {
+            for (int i = 1; i <= dictionary.Length; i++)
+            {
+                Console.WriteLine($"{i}. " +
+                    $"{dictionary[i - 1].key.ToString()} : " +
+                    $"{dictionary[i - 1].value.ToString()}");
+            }
+        } 
     }
 }
 

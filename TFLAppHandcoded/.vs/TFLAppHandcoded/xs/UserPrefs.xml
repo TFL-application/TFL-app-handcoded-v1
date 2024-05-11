@@ -1,24 +1,45 @@
 ﻿<Properties StartupConfiguration="{8253305B-2D25-449C-80DC-8453C2FC8256}|Default">
-  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded.tests FirstBuild="True" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
-  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Program.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded.tests/AlgorithmTests.cs">
     <Files>
-      <File FileName="TFLAppHandcoded/Program.cs" Line="9" Column="2" />
+      <File FileName="TFLAppHandcoded/Network.cs" Line="292" Column="1" />
+      <File FileName="TFLAppHandcoded/networkData.cs" Line="83" Column="1" />
+      <File FileName="TFLAppHandcoded/NetworkInitializer.cs" Line="250" Column="1" />
+      <File FileName="TFLAppHandcoded/Program.cs" Line="14" Column="53" />
+      <File FileName="TFLAppHandcoded/Menu.cs" Line="17" Column="45" />
+      <File FileName="TFLAppHandcoded.tests/AlgorithmTests.cs" Line="159" Column="39" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="TFLAppHandcoded">
+          <Node name="TFLAppHandcoded" expanded="True">
             <Node name="TFLAppHandcoded" expanded="True">
-              <Node name="Program.cs" selected="True" />
+              <Node name="Dictionary" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Lists" expanded="True" />
+            </Node>
+            <Node name="TFLAppHandcoded.tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="TFLAppHandcoded">
+            <Node name="TFLAppHandcoded.tests" expanded="True">
+              <Node name="TFLAppHandcoded.tests" expanded="True">
+                <Node name="AlgorithmMethodsTests" expanded="True" />
+                <Node name="AlgorithmTests" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

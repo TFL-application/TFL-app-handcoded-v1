@@ -1,4 +1,5 @@
 ﻿using System;
+using TFLAppHandcoded.Dictionary;
 
 namespace TFLAppHandcoded.Interfaces
 {
@@ -13,6 +14,8 @@ namespace TFLAppHandcoded.Interfaces
         IStation[] GetAllStations();
         ITrack GetDistance(IStation start, IStation destination);
         WeightedLinkedList<IStation, ITrack> GetConnectedStations(IStation station);
+        Dict<IStation, LinkedList<IStation>> GetDelayedTracks();
+        Dict<IStation, LinkedList<IStation>> GetClosedTracks();
     }
 }
 

@@ -8,10 +8,7 @@ namespace TFLAppHandcoded{
 
 
         private double changeLineTime = 2.0;
-
         private Line[] lines;
-        private LinkedList<Track> closedTracks;
-        private LinkedList<Track> delayedTracks;
 
         public Network()
         {
@@ -90,7 +87,7 @@ namespace TFLAppHandcoded{
 
          
             try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -133,7 +130,7 @@ namespace TFLAppHandcoded{
         //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
         public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, bool bothDirections){
               try{
-               foreach(Iline line in lines){
+               foreach(ILine line in lines){
 
                 //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
                 //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
@@ -142,9 +139,12 @@ namespace TFLAppHandcoded{
                         foreach (Station station in line.GetAllStations())
                         {
                             if (station.Equals( stationFrom)){
-                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
+
+                                Station stationToRemoveDelayFrom = new Station(stationTo);
+
+                                WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
                             
-                            Station stationToRemoveDelayFrom = new Station(stationTo);
+                            
 
                             WeightedListNode<Station,Track>? stationToRemoveDelay =connectedFrom.FindNodeWeight(stationToRemoveDelayFrom);
 
@@ -263,12 +263,6 @@ namespace TFLAppHandcoded{
             IStation destination = this.GetStation(destinationStation);
             return FastestPathAlgorithm.GetFastestPath(start, destination, changeLineTime);
 		}
-
-        // Delete it if not used
-        IStation[] GetAllStation(ILine line)
-        {
-            return null;
-        }
 
     }
 }
