@@ -4,15 +4,18 @@ using TFLAppHandcoded.Dictionary;
 
 namespace TFLAppHandcoded
 {
-	public static class FastestPathAlgorithm
+    // This class provides a static method to find the
+    // fastest path between two stations
+    public static class FastestPathAlgorithm
     {
-        // Inner class used for algorithm
+        // Inner class representing a node used for algorithm
         private class AlgorithmNode 
         {
-            public IStation node { get; set; }
-            public double   cost { get; set; }
-            public WeightedLinkedList<IStation, double> nodePath { get; set; }
+            public IStation node { get; set; }          // The station associated with this node
+            public double   cost { get; set; }          // The cost accumulated to reach this node
+            public WeightedLinkedList<IStation, double> nodePath { get; set; }  // The path from the starting station to this node
 
+            // Constructor to initialize the AlgorithmNode
             public AlgorithmNode(IStation node, double cost, WeightedLinkedList<IStation, double>? nodePath)
             {
                 this.node       = node;
@@ -20,6 +23,7 @@ namespace TFLAppHandcoded
                 this.nodePath   = nodePath;
             }
 
+            // Method used for testing
             public override string ToString()
             {
                 return $"\t{this.node.ToString()},\t{this.cost},\t{this.nodePath.ToString()}";
@@ -33,67 +37,72 @@ namespace TFLAppHandcoded
             var unknownVertices = new Dict<IStation, AlgorithmNode>();
             var knownVertices   = new Dict<IStation, AlgorithmNode>();
 
-            // 1. Put start node to unknown vertices
-            // Set start node cost = 0 and node path = the node itself
+            // 1. Put start node to unknown stations
+            // 2. Set start node cost = 0 and node path = the node itself
             unknownVertices = AddNewNode(start, 0.0 ,
                 new AlgorithmNode(start, 0.0, new WeightedLinkedList<IStation, double>()), unknownVertices);
 
-
+            // 3. Check if there stations in unknown stations
             while (unknownVertices.GetLength() > 0)                         // Start the cycle over unknown vertices
             {
-                var selectedVertex = FindSmallestCostNode(unknownVertices); // 2. Find the station in unknown stations with the smallest cost
-                var selectedVertexItem = selectedVertex.node;               // 3. Check if the found station = destination
+                // 4.Find the station in unknown stations with the smallest cost
+                var selectedVertex = FindSmallestCostNode(unknownVertices); 
+                var selectedVertexItem = selectedVertex.node;
 
+                // 5. Check if the found station = destination
                 if (selectedVertexItem.Equals(destination))
                 {
                     selectedVertex.nodePath.ReverseList();
                     return selectedVertex.nodePath;                         // >> IF YES - EXIT from the algorithm
                 }
 
-                // 4. Move it from unknown stations to known stations
+                // 6. Move it from unknown stations to known stations
                 unknownVertices.DeleteRecordWithKey(selectedVertexItem);
                 knownVertices.AddRecord(selectedVertexItem, selectedVertex);
 
-                // 5. Find to which vertices the selected station is connected
+                // 7. Find to which stations it is connected and put them in connected stations
                 var connectedVertices = FindConnectedNodes(selectedVertexItem, changeLineTime);
 
-                if (connectedVertices.GetLength() > 0)
+                // 8. Select the first station in connected stations
+                var connectedVertexListNode = connectedVertices.GetHead();
+
+                // 9. Check if the selected connected station != null
+                while (connectedVertexListNode != null)                 // Start the cycle over connected stations
                 {
-                    var selectedConnectedVertex = connectedVertices.GetHead();
-                    while (selectedConnectedVertex != null)
+                    var connectedVertexItem = connectedVertexListNode.GetItem();
+
+                    // 10.Check if it is in known stations
+                    var isKnown = knownVertices.FindRecordValueWithKey(connectedVertexItem);
+                    if (isKnown == null)
                     {
-                        var selectedConnectedVertexItem = selectedConnectedVertex.GetItem();
-                        var isKnown = knownVertices.FindRecordValueWithKey(selectedConnectedVertexItem);
+                        // 11.Check if it is in unknown stations
+                        var isUnknown = unknownVertices.FindRecordValueWithKey(connectedVertexItem);
+                        var selectedConnectedVertexCost
+                            = connectedVertexListNode.GetWeight() + selectedVertex.cost;
 
-                        if (isKnown == null)
+                        // 12. If it is in unknown - check if its cost
+                        // + selected station cost < the cost of the in the unknown stations
+                        if (isUnknown == null || selectedConnectedVertexCost < isUnknown.cost)
                         {
-                            // 9.Check if it is in unknown stations
-                            // 10. Check if its cost in connected vertices < the cost
-                            // of the in the unknown stations
-                            var isUnknown = unknownVertices.FindRecordValueWithKey(selectedConnectedVertexItem);
-                            var selectedConnectedVertexCost
-                                = selectedConnectedVertex.GetWeight() + selectedVertex.cost;
+                            // 13.Delete old record from unknown stations if it was in unknown
+                            if (isUnknown != null)
+                                unknownVertices.DeleteRecordWithKey(connectedVertexItem);
 
-                            if (isUnknown == null || selectedConnectedVertexCost < isUnknown.cost)
-                            {
-                                if (isUnknown != null)
-                                    unknownVertices.DeleteRecordWithKey(selectedConnectedVertexItem);
-
-                                unknownVertices = AddNewNode(selectedConnectedVertexItem,
-                                    selectedConnectedVertex.GetWeight(),
-                                    selectedVertex, unknownVertices);
-                            }
+                            unknownVertices = AddNewNode(connectedVertexItem,
+                                connectedVertexListNode.GetWeight(),
+                                selectedVertex, unknownVertices);
                         }
-
-                        selectedConnectedVertex = selectedConnectedVertex.GetNext();
                     }
+
+                    // 18. Select the next station in connected stations
+                    connectedVertexListNode = connectedVertexListNode.GetNext();
                 }
             }
 
             return null;
         }
 
-
+        // Method to find the node with the smallest cost in the dictionary
         private static AlgorithmNode FindSmallestCostNode(Dict<IStation, AlgorithmNode> nodeDict)
         {
             var minCost = 1000000.0;
@@ -104,6 +113,7 @@ namespace TFLAppHandcoded
             {
                 var nodeInfo = nodeDict.FindRecordValueWithKey(node);
 
+                // 4a. If more than one - choose the one with the shortest previous nodes list
                 if (nodeInfo.cost < minCost || (nodeInfo.cost == minCost && nodeInfo.nodePath.GetLength() < minPath))
                 {
                     minCost = nodeInfo.cost;
@@ -115,32 +125,33 @@ namespace TFLAppHandcoded
             return smallestCostNode;
         }
 
-
+        // Method to add a new node to the dictionary of nodes
         private static Dict<IStation, AlgorithmNode> AddNewNode(IStation node, double weight,
             AlgorithmNode previousNode, Dict<IStation, AlgorithmNode> nodeDict)
         {
-            
+            // 15. Create path list for the connected station,
+            // starting with the connected node, and add the selected node path to it
             var connectedStationList = new WeightedLinkedList<IStation, double> (node, weight);
             var currentNode = previousNode.nodePath.GetHead();
-
             while (currentNode != null)
             {
                 var currentNodeWeight = currentNode.GetWeight();
                 connectedStationList.InsertAtHead(currentNode.GetItem(), currentNodeWeight);
                 currentNode = currentNode.GetNext();
             }
-
             connectedStationList.ReverseList();
 
+            // 16. Set connected station cost = track travel time
+            // + cost of the selected station
             var nodeInfo = new AlgorithmNode(node, previousNode.cost + weight, connectedStationList);
 
-            // Put it to unknown stations
+            // 17. Put connected station to unknown stations
             nodeDict.AddRecord(node, nodeInfo);
 
             return nodeDict;
         }
 
-
+        // Method to find the connected nodes to a given station
         private static WeightedLinkedList<IStation, double> FindConnectedNodes(IStation station, double changeLineTime)
         {
             var line = station.GetLine();
@@ -163,7 +174,8 @@ namespace TFLAppHandcoded
             return connectedNodes;
         }
 
-        // A public methods that uses the private class and methods used for unit test
+        // TEST METHODS
+        // Below are public methods that uses the private class and methods used for unit tests
         public static bool TestAlgorithmNode(IStation node, double cost, WeightedLinkedList<IStation, double>? nodePath)
         {
             AlgorithmNode newNode = new AlgorithmNode(node, cost, nodePath);
