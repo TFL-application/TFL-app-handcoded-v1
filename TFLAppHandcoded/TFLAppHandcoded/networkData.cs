@@ -437,13 +437,26 @@ namespace TFLAppHandcoded
             var bakerlooLine = SetLine("Bakerloo", "brown", bakerlooLineStations, bakerlooLineDistances);
             var centralLine = SetLine("Central", "red", centralLineStations, centralLineDistances);
             var piccadillyLine = SetLine("Piccadilly", "dark blue", piccadillyLineStations, piccadillyLineDistances);
-            var northernLineWest = SetLine("Northern", "black", northernLineWestStations, northernLineWestDistances);
-            var northernLineEast = SetLine("Northern", "black", northernLineEastStations, northernLineEastDistances);
+            var northernLine = SetLine("Northern", "black", northernLineWestStations, northernLineWestDistances);
+
+            var newStation1 = new Station(northernLineEastStations[0], new IStation[0]);
+            var newStation2 = new Station(northernLineEastStations[1], new IStation[0]);
+            newStation1.SetLine(northernLine);
+            newStation2.SetLine(northernLine);
+            var adjList1 = new WeightedLinkedList<IStation, ITrack>();
+            var adjList2 = new WeightedLinkedList<IStation, ITrack>();
+            var track1 = new Track(northernLineEastDistances[0]);
+            var track2 = new Track(northernLineEastDistances[0]);
+            adjList1.InsertAtHead(newStation2, track1);
+            adjList2.InsertAtHead(newStation1, track2);
+            northernLine.AddStation(newStation1, adjList1);
+            northernLine.AddStation(newStation2, adjList2);
+
 
             centralLine.GetStation("White City").AddChange(circleLine.GetStation("Wood Lane"));
             circleLine.GetStation("Wood Lane").AddChange(centralLine.GetStation("White City"));
-            northernLineEast.GetStation("Bank").AddChange(circleLine.GetStation("Monument"));
-            circleLine.GetStation("Monument").AddChange(northernLineEast.GetStation("Bank"));
+            northernLine.GetStation("Bank").AddChange(circleLine.GetStation("Monument"));
+            circleLine.GetStation("Monument").AddChange(northernLine.GetStation("Bank"));
             circleLine.GetStation("Paddington (inner)").AddChange(circleLine.GetStation("Paddington"));
             circleLine.GetStation("Paddington").AddChange(circleLine.GetStation("Paddington (inner)"));
             circleLine.GetStation("Edgware Road (inner)").AddChange(circleLine.GetStation("Edgware Road"));
@@ -456,9 +469,9 @@ namespace TFLAppHandcoded
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "West Hampstead");
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Finchley Road & Frognal");
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Stratford");
-            AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Highbury & Islington");
+            AddChangeBetweenStations(new ILine[] { victoriaLine, londonOverground }, "Highbury & Islington");
             AddChangeBetweenStations(new ILine[] { bakerlooLine, victoriaLine, centralLine }, "Oxford Circus");
-            AddChangeBetweenStations(new ILine[] { bakerlooLine, circleLine, northernLineWest }, "Embankment");
+            AddChangeBetweenStations(new ILine[] { bakerlooLine, circleLine, northernLine }, "Embankment");
             AddChangeBetweenStations(new ILine[] { centralLine, jubileeLine }, "Bond Street");
             AddChangeBetweenStations(new ILine[] { centralLine, circleLine }, "Notting Hill Gate");
             AddChangeBetweenStations(new ILine[] { centralLine, circleLine }, "Liverpool Street");
@@ -466,13 +479,13 @@ namespace TFLAppHandcoded
             AddChangeBetweenStations(new ILine[] { piccadillyLine, circleLine }, "South Kensington");
             AddChangeBetweenStations(new ILine[] { piccadillyLine, bakerlooLine }, "Piccadilly Circus");
             AddChangeBetweenStations(new ILine[] { piccadillyLine, centralLine }, "Holborn");
-            AddChangeBetweenStations(new ILine[] { northernLineWest, victoriaLine }, "Warren Street");
-            AddChangeBetweenStations(new ILine[] { northernLineWest, victoriaLine }, "Euston");
-            AddChangeBetweenStations(new ILine[] { northernLineWest, bakerlooLine }, "Charing Cross");
-            AddChangeBetweenStations(new ILine[] { northernLineWest, centralLine }, "Tottenham Court Road");
-            AddChangeBetweenStations(new ILine[] { northernLineWest, piccadillyLine }, "Leicester Square");
-            AddChangeBetweenStations(new ILine[] { northernLineEast, circleLine }, "Moorgate");
-            AddChangeBetweenStations(new ILine[] { northernLineEast, centralLine }, "Bank");
+            AddChangeBetweenStations(new ILine[] { northernLine, victoriaLine }, "Warren Street");
+            AddChangeBetweenStations(new ILine[] { northernLine, victoriaLine }, "Euston");
+            AddChangeBetweenStations(new ILine[] { northernLine, bakerlooLine }, "Charing Cross");
+            AddChangeBetweenStations(new ILine[] { northernLine, centralLine }, "Tottenham Court Road");
+            AddChangeBetweenStations(new ILine[] { northernLine, piccadillyLine }, "Leicester Square");
+            AddChangeBetweenStations(new ILine[] { northernLine, circleLine }, "Moorgate");
+            AddChangeBetweenStations(new ILine[] { northernLine, centralLine }, "Bank");
 
             var lines = new ILine[]
             {
@@ -483,8 +496,7 @@ namespace TFLAppHandcoded
                 bakerlooLine,
                 centralLine,
                 piccadillyLine,
-                northernLineWest,
-                northernLineEast
+                northernLine
             };
 
             return lines;
