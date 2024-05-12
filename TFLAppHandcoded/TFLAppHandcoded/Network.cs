@@ -125,6 +125,10 @@ namespace TFLAppHandcoded
                         if (trackTo != null)
                         {
                             trackTo.SetDelay(time);
+
+                            Console.WriteLine($"Time delay of {time} minutes added from {stationFrom} to {stationTo} on line {line}.");
+
+
                         }
                         if (bothDirections)
                         {
@@ -134,6 +138,10 @@ namespace TFLAppHandcoded
                             if (trackFrom != null)
                             {
                                 trackFrom.SetDelay(time);
+
+                                Console.WriteLine($"Time delay of {time} minutes added from {stationTo} to {stationFrom} on line {line}.");
+
+
                             }
                         }
                     }
@@ -165,6 +173,10 @@ namespace TFLAppHandcoded
                         if (trackTo != null)
                         {
                             trackTo.SetDelay(0.0);
+
+                            Console.WriteLine($"Time delay removed from {stationFrom} to {stationTo} on line {line}.");
+
+
                         }
                         if (bothDirections)
                         {
@@ -174,6 +186,10 @@ namespace TFLAppHandcoded
                             if (trackFrom != null)
                             {
                                 trackFrom.SetDelay(0.0);
+
+                                Console.WriteLine($"Time delay removed from {stationTo} to {stationFrom} on line {line}.");
+
+
                             }
                         }
                     }
@@ -204,6 +220,10 @@ namespace TFLAppHandcoded
                         if (trackTo != null)
                         {
                             trackTo.SetIsOpen(false);
+
+                            Console.WriteLine($"Track closed from {stationFrom} to {stationTo} on line {line}.");
+
+
                         }
                         if (bothDirections)
                         {
@@ -213,6 +233,10 @@ namespace TFLAppHandcoded
                             if (trackFrom != null)
                             {
                                 trackFrom.SetIsOpen(false);
+
+                                Console.WriteLine($"Track closed from {stationTo} to {stationFrom} on line {line}.");
+
+
                             }
                         }
                     }
@@ -245,6 +269,10 @@ namespace TFLAppHandcoded
                         if (trackTo != null)
                         {
                             trackTo.SetIsOpen(true);
+
+                            Console.WriteLine($"Track opened from {stationFrom} to {stationTo} on line {line}.");
+
+
                         }
                         if (bothDirections)
                         {
@@ -254,6 +282,10 @@ namespace TFLAppHandcoded
                             if (trackFrom != null)
                             {
                                 trackFrom.SetIsOpen(true);
+
+                                Console.WriteLine($"Track opened from {stationTo} to {stationFom} on line {line}.");
+
+
                             }
                         }
                     }
