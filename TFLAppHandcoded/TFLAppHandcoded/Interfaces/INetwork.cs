@@ -4,14 +4,14 @@ namespace TFLAppHandcoded.Interfaces
 {
 	public interface INetwork
     {
-        void GetLines();
+        string[] GetLines();
         IStation GetStation(string stationname);
-        IStation[] GetAllStation(string linename);
-        void AddTimeDelay(ILine l, string stationFrom, string stationTo, double time, bool bothDirections);
-        void DeleteTimeDelay(ILine l, string stationFrom, string stationTo, bool bothDirections);
-        void CloseTrack(ILine l, string stationFrom, string stationTo, bool bothDirections);
-        void OpenTrack(ILine l, string stationFrom, string stationTo);
-        WeightedLinkedList<IStation, double> FindShortestPath(string startStation, string destinationStation);
+        string[] GetAllStations(string linename);
+        void AddTimeDelay(string line, string stationFrom, string stationTo, double time, bool bothDirections);
+        void DeleteTimeDelay(string line, string stationFrom, string stationTo, bool bothDirections);
+        void CloseTrack(string line, string stationFrom, string stationTo, bool bothDirections);
+        void OpenTrack(string line, string stationFrom, string stationTo, bool bothDirections);
+        WeightedLinkedList<IStation, double>? FindShortestPath(string stationFrom, string lineFrom, string stationTo, string lineTo);
     }
 }
 

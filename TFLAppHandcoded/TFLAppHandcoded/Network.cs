@@ -2,49 +2,38 @@
 using TFLAppHandcoded.Interfaces;
 using TFLAppHandcoded.Dictionary;
 
-namespace TFLAppHandcoded{
+namespace TFLAppHandcoded
+{
 
-    public class Network: INetwork{
-
-
+    public class Network : INetwork
+    {
         private double changeLineTime = 2.0;
-        private Line[] lines;
+        private ILine[] lines;
 
         public Network()
         {
             NetworkData data = new NetworkData();
-            lines = data.lines;
+            lines = (data.network);
         }
-
 
         //return type void is added because it might be required for the menu to display line
-        public void GetLines(){
-            int lineLength=lines.Length;
-            try{
-                if(lineLength<=0){
-                    throw new ArgumentException("No valid Data to Show");
-                }
-
-                for(int i=0;i<lineLength;i++){
-                    Console.WriteLine($"Line : {lines[i].GetName()}");
-                    Console.WriteLine($"Line : {lines[i].GetColor()}");
-                }
-            }catch (Exception ex)
+        public string[] GetLines()
+        {
+            var lineArray = new string[lines.Length];
+            for (int i = 0; i < lines.Length; i++)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                lineArray[i] = lines[i].GetName();
             }
-
-
-
+            return lineArray;
         }
 
-        // Delete it if not used
-        public IStation GetStation(string stationname){
+        public IStation GetStation(string stationname)
+        {
             try
             {
-                foreach (Line line in lines)
+                foreach (ILine line in lines)
                 {
-                    foreach (Station station in line.GetAllStations())
+                    foreach (IStation station in line.GetAllStations())
                     {
                         if (station.GetName() == stationname)
                         {
@@ -53,216 +42,235 @@ namespace TFLAppHandcoded{
                     }
                 }
 
-                throw new ArgumentException($"Station name : {stationname} doesnot falls on the line");
+                throw new ArgumentException($"Station name : {stationname} does not falls on the line");
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine("An error occured:", ex.Message);
             }
-            return null;
 
+            return null;
+        }
+
+        public IStation GetStation(string stationname, string linename)
+        {
+            try
+            {
+                foreach (ILine line in lines)
+                {
+                    if (line.GetName() == linename)
+                    {
+                        return line.GetStation(stationname);
+                    }
+                }
+
+                throw new ArgumentException($"Station name : {stationname} does not falls on the line");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
+            }
+
+            return null;
         }
 
 
-        public IStation[] GetAllStation(string linename){
-
-            try{
-                foreach (Line line in lines){
-                if(line.GetName()==linename){
-                    return line.GetAllStations();
+        public string[] GetAllStations(string linename)
+        {
+            try
+            {
+                foreach (ILine line in lines)
+                {
+                    if (line.GetName() == linename)
+                    {
+                        var stations = line.GetAllStations();
+                        var stationArray = new string[stations.Length];
+                        for (int i = 0; i < stations.Length; i++)
+                        {
+                            Console.WriteLine(stations[i].GetName());
+                            stationArray[i] = stations[i].GetName();
+                        }
+                        return stationArray;
                     }
-                    throw new ArgumentException($"Line name {line.GetName()} not Found");
-
                 }
+                throw new ArgumentException($"Line name {linename} not Found");
             }
-            catch (Exception ex){
-                Console.WriteLine("An error occured:",ex.Message);
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
             }
             return null;
         }
 
         //I have added Line attirbute:
-        public void AddTimeDelay(ILine l, string stationFrom,string stationTo, double time, bool bothDirections){
+        public void AddTimeDelay(string line, string stationFrom, string stationTo, double time, bool bothDirections)
+        {
+            try
+            {
+                foreach (ILine l in this.lines)
+                {
+                    // CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                    // Implementing checks to find if the stationTo exists as a record in Adjlist in
+                    // Line Class and stationFrom exists as a value in connected station
+                    if (l.GetName() == line)
+                    {
+                        IStation stationFromObject = l.GetStation(stationFrom);
+                        WeightedLinkedList<IStation, ITrack> connectedFrom = l.GetConnectedStations(stationFromObject);
 
-         
-            try{
-               foreach(ILine line in lines){
+                        IStation stationToObject = l.GetStation(stationTo);
+                        ITrack trackTo = connectedFrom.FindNodeWeight(stationToObject);
 
-                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
-                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
-                if (line.GetName()==l.GetName()){
-
-                        foreach (Station station in line.GetAllStations())
+                        if (trackTo != null)
                         {
-                            if (station.Equals( stationFrom)){
-                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
-                            
-                            Station stationToAddDelayFrom = new Station(stationTo);
+                            trackTo.SetDelay(time);
+                        }
+                        if (bothDirections)
+                        {
+                            WeightedLinkedList<IStation, ITrack> connectedTo = l.GetConnectedStations(stationToObject);
+                            ITrack trackFrom = connectedTo.FindNodeWeight(stationFromObject);
 
-                            WeightedListNode<Station,Track>? stationToAddDelay =connectedFrom.FindNodeWeight(stationToAddDelayFrom);
-
-                            if(stationToAddDelay){
-                            Track trackFrom = stationToAddDelayFrom.GetWeight();
-                            trackFrom.SetDelay(time);
+                            if (trackFrom != null)
+                            {
+                                trackFrom.SetDelay(time);
                             }
-                            if (bothDirections){
-                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
-
-                                Station stationToAddDelayTo = new Station(stationFrom);
-
-                                WeightedListNode<Station,Track>? stationToAddDelay2 =connectedTo.FindNodeWeight(stationToAddDelayTo);
-
-                                if(stationToAddDelay2){
-                                Track trackTo = stationToAddDelayTo.GetWeight();
-                                trackTo.SetDelay(time);
-                                }
-                                
-                            }
-                            }}}
-                
-    
-            }}catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.message);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
             }
         }
 
         //Boothdirection Attribute is added to this method as well as Delay could or could not be in both directions
-        public void DeleteTimeDelay(ILine l, string stationFrom,string stationTo, bool bothDirections){
-              try{
-               foreach(ILine line in lines){
+        public void DeleteTimeDelay(string line, string stationFrom, string stationTo, bool bothDirections)
+        {
+            try
+            {
+                foreach (ILine l in lines)
+                {
+                    //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
+                    //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
+                    if (l.GetName() == line)
+                    {
+                        IStation stationFromObject = l.GetStation(stationFrom);
+                        WeightedLinkedList<IStation, ITrack> connectedFrom = l.GetConnectedStations(stationFromObject);
 
-                //.CheckKey method taken from handcoded Dicitonary vand FInditem taken from weighted Linked list
-                //Implementing checks to find if the stationTo exists as a record in Adjlist in Line Class and stationFrom exists as a value in connected station
-                if (line.GetName()==l.GetName()){
+                        IStation stationToObject = l.GetStation(stationTo);
+                        ITrack trackTo = connectedFrom.FindNodeWeight(stationToObject);
 
-                        foreach (Station station in line.GetAllStations())
+                        if (trackTo != null)
                         {
-                            if (station.Equals( stationFrom)){
+                            trackTo.SetDelay(0.0);
+                        }
+                        if (bothDirections)
+                        {
+                            WeightedLinkedList<IStation, ITrack> connectedTo = l.GetConnectedStations(stationToObject);
+                            ITrack trackFrom = connectedTo.FindNodeWeight(stationFromObject);
 
-                                Station stationToRemoveDelayFrom = new Station(stationTo);
-
-                                WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
-                            
-                            
-
-                            WeightedListNode<Station,Track>? stationToRemoveDelay =connectedFrom.FindNodeWeight(stationToRemoveDelayFrom);
-
-                            if(stationToRemoveDelay){
-                            Track trackFrom = stationToRemoveDelayFrom.GetWeight();
-                            trackFrom.SetDelay(0.0);
+                            if (trackFrom != null)
+                            {
+                                trackFrom.SetDelay(0.0);
                             }
-                            if (bothDirections){
-                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
-
-                                Station stationToRemoveDelayTo = new Station(stationFrom);
-
-                                WeightedListNode<Station,Track>? stationToRemoveDelay2 =connectedTo.FindNodeWeight(stationToRemoveDelayTo);
-
-                                if(stationToremoveDelay2){
-                                Track trackTo = stationToremoveDelayTo.GetWeight();
-                                trackTo.SetDelay(0.0);
-                                }
-                                
-                            }
-                            }}}
-                
-    
-            }}catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.message);
-            }}}
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
+            }
+        }
 
 
         //Removed time and bothdirection attribute 
-        public void CloseTrack(ILine l, string stationFrom,string stationTo, bool bothDirections = false)
+        public void CloseTrack(string line, string stationFrom, string stationTo, bool bothDirections)
         {
-        try{
-               foreach(ILine line in lines){
-                if (line.GetName()==l.GetName()){
+            try
+            {
+                foreach (ILine l in this.lines)
+                {
+                    if (l.GetName() == line)
+                    {
+                        IStation stationFromObject = l.GetStation(stationFrom);
+                        WeightedLinkedList<IStation, ITrack> connectedFrom = l.GetConnectedStations(stationFromObject);
 
-                        foreach (Station station in line.GetAllStations())
+                        IStation stationToObject = l.GetStation(stationTo);
+                        ITrack trackTo = connectedFrom.FindNodeWeight(stationToObject);
+
+                        if (trackTo != null)
                         {
-                            if (station.Equals( stationFrom)){
-                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
-                            
-                            Station stationToCloseTrackFrom = new Station(stationTo);
+                            trackTo.SetIsOpen(false);
+                        }
+                        if (bothDirections)
+                        {
+                            WeightedLinkedList<IStation, ITrack> connectedTo = l.GetConnectedStations(stationToObject);
+                            ITrack trackFrom = connectedTo.FindNodeWeight(stationFromObject);
 
-                            WeightedListNode<Station,Track>? stationToCloseTrack =connectedFrom.FindNodeWeight(stationToCloseTrackFrom);
-
-                            if(stationToCloseTrack ){
-                            Track trackFrom = stationToCloseTrackFrom.SetIsOpen(false);
-                            
+                            if (trackFrom != null)
+                            {
+                                trackFrom.SetIsOpen(false);
                             }
-                            if (bothDirections){
-                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
-                                Station stationToCloseTrackTo = new Station(stationFrom);
-                                WeightedListNode<Station,Track>? stationToCloseTrack2 =connectedTo.FindNodeWeight(stationToCloseTrackTo);
+                        }
+                    }
+                }
+            }
 
-                                if(stationToCloseTrack2 ){
-                                Track trackTo = stationToCloseTrack2 .SetIsOpen(false);
-                                
-                                }}
-                            
-                            }
-                            }}}}
-             
-             catch(Exception ex){
-                    Console.WriteLine("An error occured:",Ex.message);
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
             }
         }
 
 
 
 
-        public void OpenTrack(ILine l, string stationFrom, string stationTo)
+        public void OpenTrack(string line, string stationFrom, string stationTo, bool bothDirections)
         {
-              try
-               foreach(ILine line in lines){
-                if (line.GetName()==l.GetName()){
+            try
+            {
+                foreach (ILine l in lines)
+                {
+                    if (l.GetName() == line)
+                    {
+                        IStation stationFromObject = l.GetStation(stationFrom);
+                        WeightedLinkedList<IStation, ITrack> connectedFrom = l.GetConnectedStations(stationFromObject);
 
-                        foreach (Station station in line.GetAllStations())
+                        IStation stationToObject = l.GetStation(stationTo);
+                        ITrack trackTo = connectedFrom.FindNodeWeight(stationToObject);
+
+                        if (trackTo != null)
                         {
-                            if (station.Equals( stationFrom)){
-                            WeightedLinkedList<Station ,Track > connectedFrom = l.GetConnectedStations(stationFrom);
-                            
-                            Station stationToOpenTrackFrom = new Station(stationTo);
+                            trackTo.SetIsOpen(true);
+                        }
+                        if (bothDirections)
+                        {
+                            WeightedLinkedList<IStation, ITrack> connectedTo = l.GetConnectedStations(stationToObject);
+                            ITrack trackFrom = connectedTo.FindNodeWeight(stationFromObject);
 
-                            WeightedListNode<Station,Track>? stationToOpenTrack =connectedFrom.FindNodeWeight(stationToOpenTrackFrom);
-
-                            if(stationToOpenTrack ){
-                            Track trackFrom = stationToOpenTrackFrom.SetIsOpen(true);
-                            
+                            if (trackFrom != null)
+                            {
+                                trackFrom.SetIsOpen(true);
                             }
-                            if (bothDirections){
-                                WeightedLinkedList<Station ,Track > connectedTo = l.GetConnectedStations(stationTo);
-                                Station stationToOpenTrackTo = new Station(stationFrom);
-                                WeightedListNode<Station,Track>? stationToOpenTrack2 =connectedTo.FindNodeWeight(stationToOpenTrackTo);
-
-                                if(stationToOpenTrack2){
-                                Track trackTo = stationToOpenTrack2.SetIsOpen(true);
-                                
-                                }}
-                            
-                            }
-                            }}}}
-              
-              
-              
-              
-              
-              catch(Exception ex){
-                    Console.WriteLine("An error occured:",ex.message);
+                        }
+                    }
+                }
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured:", ex.Message);
+            }
         }
 
 
-        public WeightedLinkedList<IStation, double>? FindShortestPath(string startStation, string destinationStation)
-		{
-            IStation start = this.GetStation(startStation);
-            IStation destination = this.GetStation(destinationStation);
+        public WeightedLinkedList<IStation, double>? FindShortestPath(string stationFrom, string lineFrom, string stationTo, string lineTo)
+        {
+            IStation start = this.GetStation(stationFrom, lineFrom);
+            IStation destination = this.GetStation(stationTo, lineTo);
             return FastestPathAlgorithm.GetFastestPath(start, destination, changeLineTime);
-		}
-
+        }
     }
 }

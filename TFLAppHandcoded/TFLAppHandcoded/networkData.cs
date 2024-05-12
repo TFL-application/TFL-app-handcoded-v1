@@ -469,7 +469,7 @@ namespace TFLAppHandcoded
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "West Hampstead");
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Finchley Road & Frognal");
             AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Stratford");
-            AddChangeBetweenStations(new ILine[] { jubileeLine, londonOverground }, "Highbury & Islington");
+            AddChangeBetweenStations(new ILine[] { victoriaLine, londonOverground }, "Highbury & Islington");
             AddChangeBetweenStations(new ILine[] { bakerlooLine, victoriaLine, centralLine }, "Oxford Circus");
             AddChangeBetweenStations(new ILine[] { bakerlooLine, circleLine, northernLine }, "Embankment");
             AddChangeBetweenStations(new ILine[] { centralLine, jubileeLine }, "Bond Street");
