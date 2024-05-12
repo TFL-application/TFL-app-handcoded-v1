@@ -28,7 +28,6 @@ namespace TFLAppHandcoded{
         public int Tfl_menu()
         {
             Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine("**************************************************************************");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**              Please choose from options below:                       **");
@@ -103,6 +102,7 @@ namespace TFLAppHandcoded{
         // This method will return choice of operation Engineer wants to perform
         public int Engineer_Menu()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
@@ -510,7 +510,7 @@ namespace TFLAppHandcoded{
                         Console.WriteLine("Is the Delay in both Directions? choose between true or false");
                         //calling boolvalue function
                         bool dir = boolValue();
-                        network.CloseTrack(Linename, stationA, stationB, dir);
+                        network.OpenTrack(Linename, stationA, stationB, dir);
                         Console.Clear();
                         Console.WriteLine("Track opened");
                         Continue();

@@ -58,7 +58,7 @@ namespace TFLAppHandcoded
 
         public void SetDelay(double delay)
         {
-            if (delay <= 0)
+            if (delay < 0)
             {
                 throw new ArgumentException("Time cannot be negative.");
             }
