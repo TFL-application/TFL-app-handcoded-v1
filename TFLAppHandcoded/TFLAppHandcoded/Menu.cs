@@ -68,7 +68,7 @@ namespace TFLAppHandcoded{
             Display_menu();
             Console.WriteLine("**************************************************************************");
             Console.WriteLine("**                                                                      **");
-            Console.WriteLine($"           Hello {name} !How we May help you?                          **");
+            Console.WriteLine($"**           Hello {name} !How we May help you?                          **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**                                                                      **");

@@ -5,12 +5,26 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded.tests/PathLengthTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Dictionary/Dictionary.cs">
     <Files>
-      <File FileName="TFLAppHandcoded/networkData.cs" />
-      <File FileName="TFLAppHandcoded/FastestPathAlgorithm.cs" />
-      <File FileName="TFLAppHandcoded.tests/AlgorithmTests.cs" />
-      <File FileName="TFLAppHandcoded.tests/PathLengthTests.cs" Line="76" Column="14" />
+      <File FileName="TFLAppHandcoded/networkData.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Network.cs" Line="255" Column="1" />
+      <File FileName="TFLAppHandcoded/Line.cs" Line="117" Column="9" />
+      <File FileName="TFLAppHandcoded/Program.cs" Line="6" Column="22" />
+      <File FileName="TFLAppHandcoded/Station.cs" Line="16" Column="55" />
+      <File FileName="TFLAppHandcoded/Interfaces/INetwork.cs" Line="4" Column="2" />
+      <File FileName="TFLAppHandcoded/Track.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Menu.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/FastestPathAlgorithm.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Lists/WeightedListNode.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Lists/WeightedLinkedList.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Lists/ListNode.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Lists/LinkedList.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Interfaces/ITrack.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Interfaces/IStation.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Interfaces/ILine.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Dictionary/DictionaryRecord.cs" Line="1" Column="1" />
+      <File FileName="TFLAppHandcoded/Dictionary/Dictionary.cs" Line="35" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,15 +35,16 @@
               <Node name="Interfaces" expanded="True" />
               <Node name="Lists" expanded="True" />
             </Node>
-            <Node name="TFLAppHandcoded.tests" expanded="True">
-              <Node name="PathLengthTests.cs" selected="True" />
-            </Node>
+            <Node name="TFLAppHandcoded.tests" expanded="True" />
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="TFLAppHandcoded" expanded="True" selected="True" />
+          <Node name="TFLAppHandcoded" selected="True" />
         </State>
       </Pad>
     </Pads>
