@@ -428,7 +428,7 @@ namespace TFLAppHandcoded{
                             StationB = Console.ReadLine();
                         }
 
-                        Console.WriteLine("Is the Delay in both Directions? choose between true or false");
+                        Console.WriteLine("Is the Track close in both Directions? choose between true or false");
                         //calling boolvalue function
                         bool directionV = boolValue();
                         network.CloseTrack(linename2, StationA, StationB, directionV);
@@ -457,7 +457,7 @@ namespace TFLAppHandcoded{
                             var lineStations3 = network.GetAllStations(Linename);
 
                             Console.WriteLine("");
-                            Console.Write("Enter Station name to Close From: ");
+                            Console.Write("Enter Station name to Open From: ");
                             string stationA = Console.ReadLine();
                             while (stationA == "" || stationA is null
                                 || !lineStations3.Contains(stationA))
@@ -467,7 +467,7 @@ namespace TFLAppHandcoded{
                             }
 
                             Console.WriteLine("");
-                            Console.Write("Enter Station name to Close Track To: ");
+                            Console.Write("Enter Station name to Open Track To: ");
                             string stationB = Console.ReadLine();
                             while (stationB == "" || stationB is null
                                 || !lineStations3.Contains(stationB))
@@ -476,7 +476,7 @@ namespace TFLAppHandcoded{
                                 stationB = Console.ReadLine();
                             }
 
-                            Console.WriteLine("Is the Delay in both Directions? choose between true or false");
+                            Console.WriteLine("Is the Track Open in both Directions? choose between true or false");
                             //calling boolvalue function
                             bool dir = boolValue();
                             Console.Clear();
