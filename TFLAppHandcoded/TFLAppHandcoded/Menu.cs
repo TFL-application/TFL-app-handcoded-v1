@@ -446,7 +446,7 @@ namespace TFLAppHandcoded{
                             var lines3 = network.GetLines();
 
                             Console.WriteLine("");
-                            Console.Write("Enter Line name to close track: ");
+                            Console.Write("Enter Line name to Open track: ");
                             string? Linename = Console.ReadLine();
                             while (Linename == "" || Linename is null || !lines3.Contains(Linename))
                             {
