@@ -28,14 +28,11 @@ namespace TFLAppHandcoded.Dictionary
                 {
                     return true;
                 }
-                    return false;   
+            return false;
         }
 
         public bool AddRecord(K key, V value)
 		{
-            //if (CheckKeyExists(key))
-            //    return false;
-
             DictionaryRecord<K, V> newRecord = new DictionaryRecord<K, V>(key, value);
 
             int newLength = dictionary.Length + 1;

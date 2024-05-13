@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json.Linq;
 using TFLAppHandcoded.Interfaces;
 
 namespace TFLAppHandcoded.tests
@@ -11,6 +15,104 @@ namespace TFLAppHandcoded.tests
     [TestSubject(typeof(FastestPathAlgorithm))]
     public class AlgorithmTests
     {
+        [TestMethod]
+        public void BenchmarkTestSimpleData()
+        {
+            var lines = TestData.GetSimpleTestData();
+
+            var enbankmentCircle = lines[2].GetStation("Enbankment");
+            var greenParkVictoria = lines[0].GetStation("Green Park");
+
+            Stopwatch stopWatch = new Stopwatch();
+
+            WeightedLinkedList<IStation, double> path = null;
+
+            stopWatch.Start();
+            for (int i = 0; i < 640000; i++)
+                path = FastestPathAlgorithm.GetFastestPath(enbankmentCircle, greenParkVictoria, 2.0);
+
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+
+            var node = path.GetHead();
+            while (node != null)
+            {
+                Console.WriteLine($"{node.GetItem().GetName()} {node.GetItem().GetLine().GetName()} {node.GetWeight()}");
+                node = node.GetNext();
+            }
+
+            string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds);
+            Console.WriteLine("RunTime " + elapsedTime);
+        }
+
+        [TestMethod]
+        public void BenchmarkTestRealData()
+        {
+            var data = new NetworkData();
+            var lines = data.network;
+
+            var canadaWaterJubilee = lines[0].GetStation("Canada Water");
+            var shepherdsBush = lines[5].GetStation("Shepherd's Bush");
+
+            Stopwatch stopWatch = new Stopwatch();
+
+            WeightedLinkedList<IStation, double> path = null;
+
+            stopWatch.Start();
+            for (int i = 0; i < 64000; i++)
+                path = FastestPathAlgorithm.GetFastestPath(canadaWaterJubilee, shepherdsBush, 2.0);
+
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+
+            var node = path.GetHead();
+            while (node != null)
+            {
+                Console.WriteLine($"{node.GetItem().GetName()} {node.GetItem().GetLine().GetName()} {node.GetWeight()}");
+                node = node.GetNext();
+            }
+
+            string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds);
+            Console.WriteLine("RunTime " + elapsedTime);
+        }
+
+        [TestMethod]
+        public void RandomStationsBenchmark()
+        {
+            int times = 64000;
+            var data = new NetworkData();
+            var lines = data.network;
+            Random r = new Random();
+
+
+            double sum = 0.0;
+
+            for (int i = 0; i < times; i++)
+            {
+                Stopwatch stopWatch = new Stopwatch();
+                var startLine = lines[r.Next(0, lines.Length)];
+                var startStation = startLine.GetAllStations()[r.Next(0, startLine.GetAllStations().Length)];
+                var endLine = lines[r.Next(0, lines.Length)];
+                var endStation = endLine.GetAllStations()[r.Next(0, endLine.GetAllStations().Length)];
+                stopWatch.Start();
+                var path = FastestPathAlgorithm.GetFastestPath(startStation, endStation, 2.0);
+                stopWatch.Stop();
+                TimeSpan ts = stopWatch.Elapsed;
+                sum += ts.TotalMilliseconds; // Corrected the calculation of elapsed time
+            }
+
+            //var node = path.GetHead();
+            //while (node != null)
+            //{
+            //    Console.WriteLine($"{node.GetItem().GetName()} {node.GetItem().GetLine().GetName()} {node.GetWeight()}");
+            //    node = node.GetNext();
+            //}
+
+            sum = sum / times; // Calculate average time
+            string formattedAverageTime = $"{sum:00.000}s";
+            Console.WriteLine("Average Runtime: " + formattedAverageTime);
+        }
+
         [TestMethod]
         public void SimpleDataTest1()
         {

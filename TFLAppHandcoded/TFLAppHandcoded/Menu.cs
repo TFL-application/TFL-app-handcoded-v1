@@ -1,5 +1,6 @@
+using System.Linq;
+using System.Xml.Linq;
 using TFLAppHandcoded.Interfaces;
-using static System.Collections.Specialized.BitVector32;
 
 namespace TFLAppHandcoded{
 
@@ -27,7 +28,8 @@ namespace TFLAppHandcoded{
 
         public int Tfl_menu()
         {
-            Console.WriteLine();
+            Console.Clear();
+            Display_menu();
             Console.WriteLine("**************************************************************************");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**              Please choose from options below:                       **");
@@ -60,32 +62,26 @@ namespace TFLAppHandcoded{
 
 
         // THis method will return choice of operation Cutomer wants to perform
-        public int Customer_Menu()
+        public int Customer_Menu(string? name)
         {
             Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("Welcome To TFL ");
-            Console.WriteLine("Enter your Name Customer");
-            string? name= Console.ReadLine();
-            Console.Clear();
+            Display_menu();
             Console.WriteLine("**************************************************************************");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine($"           Hello {name} !How we May help you?                          **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**                                                                      **");
-            Console.WriteLine("** Enter Options from 1-3                                               **");
+            Console.WriteLine("** Enter Options from 1-2                                               **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("** 1. Choose Station by Line                                            **");
-            //Console.WriteLine("**                                                                      **");
-            //Console.WriteLine("** 2. Choose Journey by Station Name                                    **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** 2. Exit to Main Menu                                                 **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**************************************************************************");
             int choice = 0;
-            while (choice < 1 || choice > 3)
+            while (choice < 1 || choice > 2)
             {
                 try
                 {
@@ -103,7 +99,7 @@ namespace TFLAppHandcoded{
         public int Engineer_Menu()
         {
             Console.Clear();
-            Console.WriteLine();
+            Display_menu();
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**                                                                      **");
@@ -118,13 +114,17 @@ namespace TFLAppHandcoded{
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** 4. Open  Track                                                       **");
             Console.WriteLine("**                                                                      **");
-            Console.WriteLine("** 5. Exit To Main Menu                                                 **");
+            Console.WriteLine("** 5. See Closed Tracks                                                 **");
+            Console.WriteLine("**                                                                      **");
+            Console.WriteLine("** 6. See Tracks with Delays                                            **");
+            Console.WriteLine("**                                                                      **");
+            Console.WriteLine("** 7. Exit To Main Menu                                                 **");
             Console.WriteLine("**                                                                      **");
             Console.WriteLine("** ---------------------------------------------------------------------**");
             Console.WriteLine("**************************************************************************");
 
             int choice = 0;
-            while (choice < 1 || choice > 6)
+            while (choice < 1 || choice > 7)
             {
                 try
                 {
@@ -138,10 +138,16 @@ namespace TFLAppHandcoded{
             return choice;
         }
 
-        public void Customer_Operation(int option)
+        public void Customer_Operation()
         {
+            Console.Clear();
+            Console.WriteLine("Welcome To TFL ");
+            Console.WriteLine("Enter your Name Customer");
+            string? name = Console.ReadLine();
+            int option = 0;
             do
             {
+                option = Customer_Menu(name);
                 switch (option)
                 {
                     // Case when customer chooses to decide Journey from choosing Line 
@@ -226,38 +232,27 @@ namespace TFLAppHandcoded{
                         Console.Write($"Journey from {stationFrom}, {lineFrom} to {stationTo}, {lineTo}");
                         Console.WriteLine("");
                         ShowPath(path);
-                        return;
-
-                    // Case when customer chooses to decide Journey from choosing Station
-                    //case 2:
-                    //    Console.WriteLine("Enter Start Journey Station");
-                    //    string StationStart = Console.ReadLine();
-                    //    Console.WriteLine("Enter Destination Station");
-                    //    string StationEnd = Console.ReadLine();
-                    //    //network.FindShortestPath(StationStart, StationEnd);
-                    //    break;
+                        break;
 
                     case 2:
                         // Exiting back to main menu
-                        int menuChoice = Tfl_menu();
-                        StartJourney(menuChoice);
                         break;
 
                     default:
                         Console.WriteLine("Invalid Option Entered! Please choose Valid Option");
-                        int choice = Customer_Menu();
-                        Customer_Operation(choice);
                         break;
                 }
-            } while (option != 1);
+            } while (option != 2);
         }
 
 
         //Engineer Options
-        public void Engineer_Operation(int choice)
+        public void Engineer_Operation()
         {
+            int choice = 0;
             do
             {
+                choice = Engineer_Menu();
                 switch (choice)
                 {
                     //Case When Engineer chooses to Add Delay
@@ -339,61 +334,47 @@ namespace TFLAppHandcoded{
                     //Case When Engineer chooses to Remove Delay
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Choose Line");
-                        Console.WriteLine("-------------");
-
-                        var lines1 = network.GetLines();
-                        foreach (string line in lines1)
+                        if (PrintDelayedTracks() > 0)
                         {
-                            Console.WriteLine(line);
+                            var lines1 = network.GetLines();
+
+                            Console.WriteLine("");
+                            Console.Write("Enter Line name to Remove delay: ");
+                            string? linename1 = Console.ReadLine();
+                            while (linename1 == "" || linename1 is null || !lines1.Contains(linename1))
+                            {
+                                Console.Write("Enter Line Name again: ");
+                                linename1 = Console.ReadLine();
+                            }
+
+                            var lineStations1 = network.GetAllStations(linename1);
+
+                            Console.WriteLine("");
+                            Console.Write("Enter Station name to Remove Delay From: ");
+                            string FromStation = Console.ReadLine();
+                            while (FromStation == "" || FromStation is null
+                                || !lineStations1.Contains(FromStation))
+                            {
+                                Console.Write("Enter Station again: ");
+                                FromStation = Console.ReadLine();
+                            }
+
+                            Console.WriteLine("");
+                            Console.Write("Enter Station name to Remove Delay To: ");
+                            string ToStation = Console.ReadLine();
+                            while (ToStation == "" || ToStation is null
+                                || !lineStations1.Contains(ToStation))
+                            {
+                                Console.Write("Enter Station again: ");
+                                ToStation = Console.ReadLine();
+                            }
+
+                            Console.WriteLine("Is the Delay in both Directions? choose between true or false");
+                            //calling boolvalue function
+                            bool directionVal = boolValue();
+                            Console.Clear();
+                            network.DeleteTimeDelay(linename1, FromStation, ToStation, directionVal);
                         }
-
-                        Console.WriteLine("");
-                        Console.Write("Enter Line name to Remove delay: ");
-                        string? linename1 = Console.ReadLine();
-                        while (linename1 == "" || linename1 is null || !lines1.Contains(linename1))
-                        {
-                            Console.Write("Enter Line Name again: ");
-                            linename1 = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("");
-                        Console.WriteLine("Stations on the line");
-                        Console.WriteLine("-------------");
-                        var lineStations1 = network.GetAllStations(linename1);
-                        foreach (string station in lineStations1)
-                        {
-                            Console.WriteLine(station);
-                        }
-
-                        Console.WriteLine("");
-                        Console.Write("Enter Station name to Remove Delay From: ");
-                        string FromStation = Console.ReadLine();
-                        while (FromStation == "" || FromStation is null
-                            || !lineStations1.Contains(FromStation))
-                        {
-                            Console.Write("Enter Station again: ");
-                            StationStart = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("");
-                        Console.Write("Enter Station name to Remove Delay To: ");
-                        string ToStation = Console.ReadLine();
-                        while (ToStation == "" || ToStation is null
-                            || !lineStations1.Contains(ToStation))
-                        {
-                            Console.Write("Enter Station again: ");
-                            StationEnd = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("Is the Delay in both Directions? choose between true or false");
-                        //calling boolvalue function
-                        bool directionVal = boolValue();
-
-                        network.DeleteTimeDelay(linename1, FromStation, ToStation, directionVal);
-
-                        Console.Clear();
-                        Console.WriteLine("Time delay deleted");
                         Continue();
                         break;
 
@@ -434,7 +415,7 @@ namespace TFLAppHandcoded{
                             || !lineStations2.Contains(StationA))
                         {
                             Console.Write("Enter Station again: ");
-                            StationStart = Console.ReadLine();
+                            StationA = Console.ReadLine();
                         }
 
                         Console.WriteLine("");
@@ -444,7 +425,7 @@ namespace TFLAppHandcoded{
                             || !lineStations2.Contains(StationB))
                         {
                             Console.Write("Enter Station again: ");
-                            StationEnd = Console.ReadLine();
+                            StationB = Console.ReadLine();
                         }
 
                         Console.WriteLine("Is the Delay in both Directions? choose between true or false");
@@ -460,77 +441,74 @@ namespace TFLAppHandcoded{
                     //Case when Enginner chooses to Open Track
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Choose Line");
-                        Console.WriteLine("-------------");
-
-                        var lines3 = network.GetLines();
-                        foreach (string line in lines3)
+                        if (PrintClosedTracks() > 0)
                         {
-                            Console.WriteLine(line);
-                        }
+                            var lines3 = network.GetLines();
 
-                        Console.WriteLine("");
-                        Console.Write("Enter Line name to close track: ");
-                        string? Linename = Console.ReadLine();
-                        while (Linename == "" || Linename is null || !lines3.Contains(Linename))
-                        {
-                            Console.Write("Enter Line Name again: ");
-                            Linename = Console.ReadLine();
-                        }
+                            Console.WriteLine("");
+                            Console.Write("Enter Line name to close track: ");
+                            string? Linename = Console.ReadLine();
+                            while (Linename == "" || Linename is null || !lines3.Contains(Linename))
+                            {
+                                Console.Write("Enter Line Name again: ");
+                                Linename = Console.ReadLine();
+                            }
 
-                        Console.WriteLine("");
-                        Console.WriteLine("Stations on the line");
-                        Console.WriteLine("-------------");
-                        var lineStations3 = network.GetAllStations(Linename);
-                        foreach (string station in lineStations3)
-                        {
-                            Console.WriteLine(station);
-                        }
+                            var lineStations3 = network.GetAllStations(Linename);
 
-                        Console.WriteLine("");
-                        Console.Write("Enter Station name to Close From: ");
-                        string stationA = Console.ReadLine();
-                        while (stationA == "" || stationA is null
-                            || !lineStations3.Contains(stationA))
-                        {
-                            Console.Write("Enter Station again: ");
-                            StationStart = Console.ReadLine();
-                        }
+                            Console.WriteLine("");
+                            Console.Write("Enter Station name to Close From: ");
+                            string stationA = Console.ReadLine();
+                            while (stationA == "" || stationA is null
+                                || !lineStations3.Contains(stationA))
+                            {
+                                Console.Write("Enter Station again: ");
+                                stationA = Console.ReadLine();
+                            }
 
-                        Console.WriteLine("");
-                        Console.Write("Enter Station name to Close Track To: ");
-                        string stationB = Console.ReadLine();
-                        while (stationB == "" || stationB is null
-                            || !lineStations3.Contains(stationB))
-                        {
-                            Console.Write("Enter Station again: ");
-                            StationEnd = Console.ReadLine();
-                        }
+                            Console.WriteLine("");
+                            Console.Write("Enter Station name to Close Track To: ");
+                            string stationB = Console.ReadLine();
+                            while (stationB == "" || stationB is null
+                                || !lineStations3.Contains(stationB))
+                            {
+                                Console.Write("Enter Station again: ");
+                                stationB = Console.ReadLine();
+                            }
 
-                        Console.WriteLine("Is the Delay in both Directions? choose between true or false");
-                        //calling boolvalue function
-                        bool dir = boolValue();
-                        network.OpenTrack(Linename, stationA, stationB, dir);
-                        Console.Clear();
-                        Console.WriteLine("Track opened");
+                            Console.WriteLine("Is the Delay in both Directions? choose between true or false");
+                            //calling boolvalue function
+                            bool dir = boolValue();
+                            Console.Clear();
+                            network.OpenTrack(Linename, stationA, stationB, dir);
+                        }
                         Continue();
-
-                        //network.OpenTrack(Linename, stationA, stationB);
                         break;
 
-
                     case 5:
-                        int menuChoice = Tfl_menu();
-                        StartJourney(menuChoice);
+                        Console.Clear();
+                        Console.WriteLine("CLOSED TRACKS");
+                        Console.WriteLine("");
+                        PrintClosedTracks();
+                        Continue();
+                        break;
+
+                    case 6:
+                        Console.Clear();
+                        Console.WriteLine("DELAYED TRACKS");
+                        Console.WriteLine("");
+                        PrintDelayedTracks();
+                        Continue();
+                        break;
+
+                    case 7:
                         break;
 
                     default:
                         Console.WriteLine("Invalid Option Entered! Please choose Valid Option");
-                        choice = Engineer_Menu();
-                        Engineer_Operation(choice);
                         break;
                 }
-            } while (choice < 1 || choice > 5);
+            } while (choice != 7);
         }
 
 
@@ -593,6 +571,76 @@ namespace TFLAppHandcoded{
         }
 
 
+        public int PrintDelayedTracks()
+        {
+            var lines = network.GetLinesArray();
+            int result = 0;
+            foreach (var line in lines)
+            {
+                var delayed = line.GetDelayedTracks();
+                if (delayed.GetLength() > 0)
+                {
+                    result += 1;
+                    Console.WriteLine(line.GetName());
+                    Console.WriteLine("-------------");
+                    foreach (var station in delayed.GetRecordKeys())
+                    {
+                        var current = delayed.FindRecordValueWithKey(station).GetHead();
+                        while (current != null)
+                        {
+                            var track = line.GetDistance(station, current.GetItem());
+                            Console.WriteLine($"{station.GetName()} to {current.GetItem().GetName()}, " +
+                                $"{track.GetTime()}+{track.GetDelay()}min");
+                            current = current.GetNext();
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+
+            if (result == 0)
+            {
+                Console.WriteLine("No delayed tracks");
+            }
+
+            return result;
+        }
+
+
+        public int PrintClosedTracks()
+        {
+            var lines = network.GetLinesArray();
+            int result = 0;
+            foreach (var line in lines)
+            {
+                var delayed = line.GetClosedTracks();
+                if (delayed.GetLength() > 0)
+                {
+                    result += 1;
+                    Console.WriteLine(line.GetName());
+                    Console.WriteLine("-------------");
+                    foreach (var station in delayed.GetRecordKeys())
+                    {
+                        var current = delayed.FindRecordValueWithKey(station).GetHead();
+                        while (current != null)
+                        {
+                            Console.WriteLine($"{station.GetName()} to {current.GetItem().GetName()}");
+                            current = current.GetNext();
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+
+            if (result == 0)
+            {
+                Console.WriteLine("No closed tracks");
+            }
+
+            return result;
+        }
+
+
         //utility function to get valid bool value as an console input
         private bool boolValue()
         {
@@ -614,21 +662,21 @@ namespace TFLAppHandcoded{
             return;
         }
 
-        public void StartJourney(int choice)
+        public void StartJourney()
         {
-            while(choice == 1 || choice == 2)
+            int choice = 0;
+            while (choice != 3)
             {
+                choice = Tfl_menu();
                 switch (choice)
                 {
                     case 1:
-                        int customerChoice = Customer_Menu();
                         // starting customer opetations
-                        Customer_Operation(customerChoice);
+                        Customer_Operation();
                         break;
 
                     case 2:
-                        int EngineerChoice = Engineer_Menu();
-                        Engineer_Operation(EngineerChoice);
+                        Engineer_Operation();
                         break;
                 }
             }

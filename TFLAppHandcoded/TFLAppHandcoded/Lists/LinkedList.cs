@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 namespace TFLAppHandcoded
 {
     public class LinkedList<T>

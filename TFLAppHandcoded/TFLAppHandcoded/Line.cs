@@ -106,11 +106,7 @@ namespace TFLAppHandcoded
 			// loop through station in dictionary
 			foreach (IStation station in stations.GetRecordKeys())
 			{
-
 				WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(station);
-
-				//creating empty list for delayed tracks 
-                LinkedList < IStation > delayedStations = new LinkedList<IStation>();
 
                 ////loop through each node in weighted linked list
                 WeightedListNode<IStation, ITrack> currentNode = connectedStations.GetHead();
@@ -118,17 +114,24 @@ namespace TFLAppHandcoded
 				{
                     ITrack track = currentNode.GetWeight();
 
-					if(track.GetDelay() > 0) // check if there is a delay
+					if (track.GetDelay() > 0) // check if there is a delay
                     {
-
-						delayedStations.InsertAtHead(currentNode.GetItem()); // add track to list
+                        if (delayedTracks.CheckKeyExists(station))
+                        {
+                            delayedTracks.FindRecordValueWithKey(station).InsertAtHead(currentNode.GetItem());
+                        }
+                        else
+                        {
+                            //creating empty list for delayed tracks 
+                            LinkedList<IStation> delayedStations = new LinkedList<IStation>();
+                            delayedStations.InsertAtHead(currentNode.GetItem()); // add track to list
+                            delayedTracks.AddRecord(station, delayedStations); // add closed station to station in dictionary
+                        }
                     }
 
                     currentNode = currentNode.GetNext(); // go to next node in list 
 
                 }
-
-				delayedTracks.AddRecord(station, delayedStations); // add delayed stations to station in dictionary
 
             }
 
@@ -147,9 +150,6 @@ namespace TFLAppHandcoded
 				//get connected stations for the station
                 WeightedLinkedList<IStation, ITrack> connectedStations = stations.FindRecordValueWithKey(station);
 
-                //creating empty list for closed stations
-                LinkedList<IStation> closedStations = new LinkedList<IStation>();
-
 				//loop through each node in weighted linked list
                 WeightedListNode<IStation, ITrack> currentNode = connectedStations.GetHead();
 				
@@ -159,23 +159,25 @@ namespace TFLAppHandcoded
 
                     if (track.GetIsOpen() == false) // check if track is closed 
                     {
-
-                        closedStations.InsertAtHead(currentNode.GetItem()); // add track to list
+						if (closedTracks.CheckKeyExists(station))
+                        {
+                            closedTracks.FindRecordValueWithKey(station).InsertAtHead(currentNode.GetItem());
+                        }
+						else
+                        {
+                            //creating empty list for closed stations
+                            LinkedList<IStation> closedStations = new LinkedList<IStation>();
+                            closedStations.InsertAtHead(currentNode.GetItem()); // add track to list
+                            closedTracks.AddRecord(station, closedStations); // add closed station to station in dictionary
+                        }
                     }
 
                     currentNode = currentNode.GetNext(); // go to next node in list
-
                 }
-
-                closedTracks.AddRecord(station, closedStations); // add closed station to station in dictionary
-
             }
 
             return closedTracks; // return dictionary 
-
         }
-
-
     }
 }
 

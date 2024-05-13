@@ -27,6 +27,11 @@ namespace TFLAppHandcoded
             return lineArray;
         }
 
+        public ILine[] GetLinesArray()
+        {
+            return lines;
+        }
+
         public IStation GetStation(string stationname)
         {
             try
@@ -89,7 +94,6 @@ namespace TFLAppHandcoded
                         var stationArray = new string[stations.Length];
                         for (int i = 0; i < stations.Length; i++)
                         {
-                            Console.WriteLine(stations[i].GetName());
                             stationArray[i] = stations[i].GetName();
                         }
                         return stationArray;
@@ -250,8 +254,6 @@ namespace TFLAppHandcoded
         }
 
 
-
-
         public void OpenTrack(string line, string stationFrom, string stationTo, bool bothDirections)
         {
             try
@@ -283,7 +285,7 @@ namespace TFLAppHandcoded
                             {
                                 trackFrom.SetIsOpen(true);
 
-                                Console.WriteLine($"Track opened from {stationTo} to {stationFom} on line {line}.");
+                                Console.WriteLine($"Track opened from {stationTo} to {stationFrom} on line {line}.");
 
 
                             }

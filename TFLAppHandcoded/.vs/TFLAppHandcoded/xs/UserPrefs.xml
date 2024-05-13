@@ -1,39 +1,38 @@
 ﻿<Properties StartupConfiguration="{8253305B-2D25-449C-80DC-8453C2FC8256}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded/Network.cs">
-    <Files>
-      <File FileName="TFLAppHandcoded/Program.cs" Line="15" Column="1" />
-      <File FileName="TFLAppHandcoded/Menu.cs" Line="121" Column="27" />
-      <File FileName="TFLAppHandcoded/Network.cs" Line="7" Column="28" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="TFLAppHandcoded">
-            <Node name="TFLAppHandcoded">
-              <Node name="Dictionary" expanded="True" />
-              <Node name="Interfaces" expanded="True" />
-              <Node name="Lists" expanded="True" />
-              <Node name="Network.cs" selected="True" />
-            </Node>
-            <Node name="TFLAppHandcoded.tests" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="TFLAppHandcoded" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TFLAppHandcoded.tests/PathLengthTests.cs">
+    <Files>
+      <File FileName="TFLAppHandcoded/networkData.cs" />
+      <File FileName="TFLAppHandcoded/FastestPathAlgorithm.cs" />
+      <File FileName="TFLAppHandcoded.tests/AlgorithmTests.cs" />
+      <File FileName="TFLAppHandcoded.tests/PathLengthTests.cs" Line="76" Column="14" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TFLAppHandcoded" expanded="True">
+            <Node name="TFLAppHandcoded" expanded="True">
+              <Node name="Dictionary" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Lists" expanded="True" />
+            </Node>
+            <Node name="TFLAppHandcoded.tests" expanded="True">
+              <Node name="PathLengthTests.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="TFLAppHandcoded" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.TFLAppHandcoded PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
